@@ -86,20 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     overlay.classList.remove("hidden");
 
-let step = 0;
-
 function get4Digit() {
   return Math.floor(1000 + Math.random() * 9000);
 }
 
 let interval = setInterval(() => {
 
-  randomBox.innerText = get4Digit();
+  // 4 DIGITS EACH TIME (like IP blocks)
+  randomBox.innerText =
+    get4Digit() + " " +
+    get4Digit() + " " +
+    get4Digit() + " " +
+    get4Digit();
 
-  step++;
-
-  // stop condition (after some cycles)
-  if (step > 20) {
+  // stop condition
+  if (Math.random() > 0.8) {
     clearInterval(interval);
 
     resultBox.classList.remove("hidden");
