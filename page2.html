@@ -6,6 +6,7 @@
 <title>FreeReward Offer</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-white">
@@ -16,7 +17,7 @@
   <h1 class="text-5xl font-bold mb-3">🎉 FreeReward Hub</h1>
 
   <!-- LIVE INFO -->
-  <div class="text-gray-300 mb-6 text-sm md:text-base">
+  <div class="text-gray-300 mb-6">
     User Online: <span id="users">0</span> |
     Last update: <span id="date"></span>
   </div>
@@ -26,28 +27,26 @@
        class="mx-auto w-full md:w-[350px] rounded-2xl overflow-hidden border border-white/20 mb-6">
   </div>
 
-  <!-- CTA (OPTIONAL CLEAN BUTTON) -->
-  <a href="YOUR_CPA_LINK"
-     class="block bg-green-500 hover:bg-green-600 p-4 rounded-xl font-bold">
-     Continue Offer 🚀
-  </a>
-
 </div>
 
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  // 📅 LAST UPDATE (today date)
+  // 📅 DATE FIX
   document.getElementById("date").innerText =
     new Date().toDateString();
 
-  // 👥 LIVE USER COUNTER
+  // 👥 USER ONLINE FIX
   let base = 200;
 
   function updateUsers(){
-    let random = Math.floor(Math.random() * 40); // 200–240
-    document.getElementById("users").innerText = base + random;
+    let random = Math.floor(Math.random() * 40);
+    let el = document.getElementById("users");
+
+    if (el) {
+      el.innerText = base + random;
+    }
   }
 
   updateUsers();
@@ -77,30 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-
-  // DATE
-  document.getElementById("date").innerText =
-    new Date().toDateString();
-
-  // USER ONLINE LIVE SYSTEM
-  let base = 200;
-
-  function updateUsers(){
-    let random = Math.floor(Math.random() * 40);
-    let el = document.getElementById("users");
-
-    if (el) {
-      el.innerText = base + random;
-    }
-  }
-
-  updateUsers();
-  setInterval(updateUsers, 1500);
-
-});
-
-  
 </script>
 
 </body>
