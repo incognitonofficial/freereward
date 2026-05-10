@@ -25,21 +25,16 @@ try {
   const dateEl = document.getElementById("date");
   if (dateEl) dateEl.innerText = new Date().toDateString();
 
-  // USER SAFE
-document.addEventListener("DOMContentLoaded", function () {
+  // FAKE LIVE USER COUNTER (realistic feel)
+let base = 200 + Math.floor(Math.random() * 20);
 
-  const el = document.getElementById("users");
+function updateUsers(){
+  let random = Math.floor(Math.random() * 20);
+  document.getElementById("users").innerText = base + random;
+}
 
-  let base = 200 + Math.floor(Math.random() * 20);
-
-  function update() {
-    if (!el) return;
-    el.innerText = base + Math.floor(Math.random() * 30);
-  }
-
-  update();
-  setInterval(update, 1500);
-
+updateUsers();
+setInterval(updateUsers, 4000);
 });
 
   // CARD SAFE
