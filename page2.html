@@ -1,158 +1,72 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Viral Giveaway Hub</title>
-  <script src="https://cdn.tailwindcss.com"></script>  <style>
-    body {
-      background: linear-gradient(135deg, #0b1020, #111827, #0ea5e9);
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeReward Offer</title>
 
-    .glow {
-      box-shadow: 0 0 30px rgba(14,165,233,0.4);
-    }
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+</head>
 
-    .float {
-      animation: float 4s ease-in-out infinite;
-    }
+<body class="bg-gray-900 text-white">
 
-    @keyframes float {
-      0%,100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-    }
+<div class="container">
 
-    .pulse {
-      animation: pulse 2s infinite;
-    }
+  <!-- HEADER -->
+  <h1 class="title">🎉 FreeReward Hub</h1>
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .card {
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-    }
-  </style></head><body class="text-white min-h-screen flex items-center justify-center p-6">  <div class="max-w-5xl w-full bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 glow"><div class="text-center">
-
-  <div class="float mb-4 inline-block">
-    <span class="text-6xl">🎉</span>
+  <div class="info">
+    User Online: <span id="users"></span> | Last update: <span id="date"></span>
   </div>
 
-  <h1 class="text-5xl font-extrabold mb-2 bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 text-transparent bg-clip-text">
-    Viral Giveaway Hub
-  </h1>
+  <!-- SELECTED CARD -->
+  <div id="selected" class="selected-box"></div>
 
-  <!-- LIVE INFO -->
-  <div id="liveInfo" class="mb-8 text-gray-200 text-base font-medium">
-    GIFT CARD GIVEAWAY<br>
-    User Online: 201 | Last update: May 10 2026
-  </div>
-
-  <!-- CARD SECTION -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-
-    <a href="YOUR_LINK_1" target="_blank"
-       class="card bg-gradient-to-br from-cyan-500/20 to-blue-500/20 p-6 rounded-2xl border border-white/10 block">
-      <div class="text-4xl mb-2">🎁</div>
-      <h2 class="text-2xl font-bold">Daily Rewards</h2>
-      <p class="text-gray-300 mt-2">Claim free rewards every 24 hours by completing simple tasks.</p>
-      <div class="mt-4 text-center bg-cyan-500 hover:bg-cyan-600 p-3 rounded-lg font-bold">
-        Claim Offer
-      </div>
-    </a>
-
-    <a href="YOUR_LINK_1" target="_blank"
-       class="card bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-6 rounded-2xl border border-white/10 block">
-      <div class="text-4xl mb-2">⚡</div>
-      <h2 class="text-2xl font-bold">Fast Offers</h2>
-      <p class="text-gray-300 mt-2">Complete quick offers and unlock instant rewards.</p>
-      <div class="mt-4 text-center bg-purple-500 hover:bg-purple-600 p-3 rounded-lg font-bold">
-        Claim Offer
-      </div>
-    </a>
-
-    <a href="YOUR_LINK_1" target="_blank"
-       class="card bg-gradient-to-br from-yellow-400/20 to-orange-500/20 p-6 rounded-2xl border border-white/10 block">
-      <div class="text-4xl mb-2">🏆</div>
-      <h2 class="text-2xl font-bold">Winner System</h2>
-      <p class="text-gray-300 mt-2">Top users get featured rewards and bonuses.</p>
-      <div class="mt-4 text-center bg-yellow-500 hover:bg-yellow-600 p-3 rounded-lg font-bold">
-        Claim Offer
-      </div>
-    </a>
-
-  </div>
-
-  <!-- COUNTDOWN -->
-  <div class="bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl p-6 mb-8">
-    <h2 class="text-2xl font-bold mb-2">Live Giveaway</h2>
-    <p class="mb-4">Complete offers to unlock rewards</p>
-    <div id="countdown" class="text-4xl font-bold tracking-widest">00:00:00</div>
-  </div>
-
-  <!-- FORM -->
-  <form class="max-w-md mx-auto space-y-4">
-    <input type="text" placeholder="Enter username"
-      class="w-full p-4 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
-
-    <input type="email" placeholder="Enter email"
-      class="w-full p-4 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
-
-    <button type="button" onclick="joinGiveaway()"
-      class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-xl font-bold text-lg pulse hover:opacity-90 transition">
-      Join Giveaway 🚀
-    </button>
-  </form>
+  <!-- BUTTON -->
+  <a href="YOUR_CPA_LINK" class="btn">
+    Continue Offer 🚀
+  </a>
 
 </div>
 
-  </div><script>
-function joinGiveaway() {
-  const username = document.querySelector('input[type="text"]').value.trim();
-  const email = document.querySelector('input[type="email"]').value.trim();
+<script>
 
-  if (!username || !email) {
-    alert('Please enter username and email to join!');
-    return;
-  }
+// DATE
+document.getElementById("date").innerText =
+new Date().toDateString();
 
-  alert('You joined successfully! 🎉');
+// LIVE USERS
+let base = 200;
+
+function updateUsers(){
+  let random = Math.floor(Math.random() * 30);
+  document.getElementById("users").innerText = base + random;
 }
 
-let endTime = new Date().getTime() + 24*60*60*1000;
+updateUsers();
+setInterval(updateUsers, 2000);
 
-setInterval(() => {
-  let now = new Date().getTime();
-  let diff = endTime - now;
+// CARD SYSTEM
+const params = new URLSearchParams(window.location.search);
+let card = params.get("card");
 
-  let h = Math.floor(diff / (1000*60*60));
-  let m = Math.floor((diff % (1000*60*60)) / (1000*60));
-  let s = Math.floor((diff % (1000*60)) / 1000);
+const data = {
+  1: "roblox.jpeg",
+  2: "roblox.jpeg",
+  3: "roblox.jpeg",
+  4: "roblox.jpeg"
+};
 
-  document.getElementById('countdown').textContent =
-    String(h).padStart(2,'0') + ':' +
-    String(m).padStart(2,'0') + ':' +
-    String(s).padStart(2,'0');
+let box = document.getElementById("selected");
 
-  if (diff < 0) document.getElementById('countdown').textContent = 'ENDED';
-}, 1000);
-
-function updateLiveInfo(){
-  const users = Math.floor(Math.random()*300)+200;
-  const date = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-
-  document.getElementById('liveInfo').innerHTML =
-  GIFT CARD GIVEAWAY<br>User Online: ${users} | Last update: ${date};
+if (data[card]) {
+  box.innerHTML = <img src="${data[card]}" class="card-img">;
+} else {
+  box.innerHTML = <p class="error">Invalid Card Selected</p>;
 }
 
-updateLiveInfo();
-setInterval(updateLiveInfo,5000);
-</script></body>
+</script>
+
+</body>
 </html>
