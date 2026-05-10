@@ -1,9 +1,4 @@
 <style>
-body{
-  background: linear-gradient(135deg,#0b1020,#111827,#0ea5e9);
-  font-family: sans-serif;
-}
-
 .card{
   transition:0.3s;
 }
@@ -20,8 +15,17 @@ body{
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 body{
-  background: linear-gradient(135deg,#0b1020,#111827,#0ea5e9);
-  font-family: sans-serif;
+  background: linear-gradient(-45deg,
+    #0b1020,
+    #0d1b2a,
+    #0a0f1c,
+    #111827
+  );
+
+  background-size: 400% 400%;
+  animation: gradientMove 25s ease infinite;
+
+  overflow-x: hidden;
 }
 .card{
   transition:0.3s;
@@ -30,6 +34,7 @@ body{
   0% {background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
+}
 }
 
 body{
