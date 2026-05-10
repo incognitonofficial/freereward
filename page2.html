@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FreeReward Offer</title>
+<title>FreeReward Hub</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-white text-center">
@@ -14,36 +13,32 @@
 <!-- TITLE -->
 <h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
 
-<!-- INFO BAR -->
+<!-- INFO -->
 <div class="mt-2 text-gray-300">
 User Online: <span id="users">200</span> |
 Last update: <span id="date"></span>
 </div>
 
-<!-- CLICKABLE IMAGE CARD -->
+<!-- IMAGE CARD -->
 <div id="selected"
 class="w-[280px] h-[360px] mx-auto mt-6 overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
 </div>
 
-<!-- MODAL OVERLAY -->
+<!-- MODAL -->
 <div id="overlay"
 class="hidden fixed inset-0 bg-black/70 flex flex-col items-center justify-center">
 
-  <!-- BIG IMAGE -->
   <img id="popupImg"
   class="w-[280px] h-[360px] object-cover rounded-2xl">
 
-  <!-- NUMBER BOX -->
   <div class="bg-white text-black mt-4 w-[280px] p-3 rounded-xl font-bold text-2xl">
     <div id="randomBox">0</div>
   </div>
 
-  <!-- RESULT TEXT -->
   <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
     Your code is ready ✅
   </div>
 
-  <!-- BUTTON -->
   <a id="ctaBox" href="YOUR_AFFILIATE_LINK"
   class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
     Continue Offer 🚀
@@ -51,7 +46,76 @@ class="hidden fixed inset-0 bg-black/70 flex flex-col items-center justify-cente
 
 </div>
 
-<script src="script.js"></script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 📅 DATE
+  document.getElementById("date").innerText = new Date().toDateString();
+
+  // 👥 USER COUNTER (SAFE + STABLE)
+  let base = 200 + Math.floor(Math.random() * 20);
+
+  function updateUsers(){
+    const el = document.getElementById("users");
+    if (!el) return;
+
+    let random = Math.floor(Math.random() * 20);
+    el.innerText = base + random;
+  }
+
+  updateUsers();
+  setInterval(updateUsers, 4000);
+
+  // 🖼️ IMAGE LOAD
+  const box = document.getElementById("selected");
+
+  box.innerHTML = `
+    <img src="roblox.jpeg"
+    class="w-full h-full object-cover">
+  `;
+
+  // 🎯 MODAL ELEMENTS
+  const overlay = document.getElementById("overlay");
+  const randomBox = document.getElementById("randomBox");
+  const resultBox = document.getElementById("resultBox");
+  const ctaBox = document.getElementById("ctaBox");
+
+  // 🖱️ CLICK EVENT
+  box.addEventListener("click", function () {
+
+    overlay.classList.remove("hidden");
+
+    let count = 0;
+    let target = 200 + Math.floor(Math.random() * 200);
+
+    let interval = setInterval(() => {
+      count += 10;
+      randomBox.innerText = count;
+
+      if (count >= target) {
+        clearInterval(interval);
+        resultBox.classList.remove("hidden");
+        ctaBox.classList.remove("hidden");
+      }
+
+    }, 60);
+
+  });
+
+  // ❌ CLOSE MODAL
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      overlay.classList.add("hidden");
+      resultBox.classList.add("hidden");
+      ctaBox.classList.add("hidden");
+      randomBox.innerText = "0";
+    }
+  });
+
+});
+
+</script>
 
 </body>
 </html>
