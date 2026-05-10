@@ -86,18 +86,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     overlay.classList.remove("hidden");
 
-    let count = 0;
-    let target = 200 + Math.floor(Math.random() * 200);
+    function getRandomLikeIP() {
+  return Math.floor(Math.random() * 9000) + 1000;
+}
 
-    let interval = setInterval(() => {
-      count += 10;
-      randomBox.innerText = count;
+let interval = setInterval(() => {
+  randomBox.innerText = getRandomLikeIP();
 
-      if (count >= target) {
-        clearInterval(interval);
-        resultBox.classList.remove("hidden");
-        ctaBox.classList.remove("hidden");
-      }
+  if (Math.random() > 0.85) {
+    clearInterval(interval);
+
+    resultBox.classList.remove("hidden");
+    ctaBox.classList.remove("hidden");
+  }
+
+}, 120);
 
     }, 60);
 
