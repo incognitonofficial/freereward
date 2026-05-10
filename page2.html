@@ -2,39 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page 2</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white text-center">
 
-<h1 class="text-5xl text-center mt-6">🎉 FreeReward Hub</h1>
+<h1 class="text-5xl mt-6">🎉 FreeReward Hub</h1>
 
-<div class="text-center mt-4 text-gray-300">
+<div class="mt-4 text-gray-300">
 User Online: <span id="users">0</span> |
-Last update: <span id="date"></span>
+Last update: <span id="date">-</span>
 </div>
 
-<div id="selected" class="mt-6 flex justify-center"></div>
+<div id="selected" class="mt-6"></div>
 
 <script>
 
 try {
 
-  document.getElementById("date").innerText =
-    new Date().toDateString();
+  // DATE SAFE
+  const dateEl = document.getElementById("date");
+  if (dateEl) dateEl.innerText = new Date().toDateString();
 
+  // USER SAFE
   let base = 200;
 
   setInterval(() => {
-    let el = document.getElementById("users");
-    if (el) {
-      el.innerText = base + Math.floor(Math.random() * 30);
+    const userEl = document.getElementById("users");
+    if (userEl) {
+      userEl.innerText = base + Math.floor(Math.random() * 30);
     }
   }, 1500);
 
+  // CARD SAFE
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card");
 
@@ -49,15 +50,17 @@ try {
 
   if (box) {
     if (data[card]) {
-      box.innerHTML =
-        <img src="${data[card]}" style="width:320px;height:350px;object-fit:cover;border-radius:16px;">;
+      box.innerHTML = `
+        <img src="${data[card]}"
+        style="width:320px;height:350px;object-fit:cover;border-radius:16px;">
+      `;
     } else {
       box.innerHTML = "<p>No Card Selected</p>";
     }
   }
 
-} catch (e) {
-  console.log("ERROR:", e);
+} catch (err) {
+  console.log("PAGE2 ERROR:", err);
 }
 
 </script>
