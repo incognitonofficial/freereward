@@ -27,9 +27,11 @@ body{
 
 <div class="max-w-6xl mx-auto px-6 py-10 text-center">
 
+  <!-- TITLE -->
   <h1 class="text-5xl font-bold mb-2">🎉 FreeReward Hub</h1>
 
-  <div class="text-gray-200 mb-10">
+  <!-- LIVE INFO -->
+  <div class="text-gray-200 mb-10 text-sm md:text-base">
     User Online: <span id="users"></span> | Last update: <span id="date"></span>
   </div>
 
@@ -67,9 +69,24 @@ body{
 
 </div>
 
+<!-- SCRIPT -->
 <script>
+
+// DATE (auto update)
 document.getElementById("date").innerText =
 new Date().toDateString();
+
+// FAKE LIVE USER COUNTER (realistic feel)
+let base = 200;
+
+function updateUsers(){
+  let random = Math.floor(Math.random() * 20); // 200–220 range
+  document.getElementById("users").innerText = base + random;
+}
+
+updateUsers();
+setInterval(updateUsers, 4000);
+
 </script>
 
 </body>
