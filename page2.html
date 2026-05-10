@@ -77,6 +77,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+
+  // DATE
+  document.getElementById("date").innerText =
+    new Date().toDateString();
+
+  // USER ONLINE LIVE SYSTEM
+  let base = 200;
+
+  function updateUsers(){
+    let random = Math.floor(Math.random() * 40);
+    let el = document.getElementById("users");
+
+    if (el) {
+      el.innerText = base + random;
+    }
+  }
+
+  updateUsers();
+  setInterval(updateUsers, 1500);
+
+});
+
+  
 </script>
 
 </body>
