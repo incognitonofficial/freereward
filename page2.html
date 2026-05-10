@@ -13,40 +13,56 @@
 
 <div class="max-w-6xl mx-auto px-6 py-10 text-center">
 
-  <!-- TITLE -->
   <h1 class="text-5xl font-bold mb-2">🎉 FreeReward Hub</h1>
 
-  <!-- LIVE INFO -->
   <div class="text-gray-200 mb-10 text-sm md:text-base">
     User Online: <span id="users"></span> |
     Last update: <span id="date"></span>
   </div>
 
-  <!-- SELECTED CARD -->
+  <!-- MAIN IMAGE -->
   <div id="selected"
-  class="card w-full md:w-[280px] h-[360px] overflow-hidden rounded-2xl border border-white/10 mx-auto">
+  class="card w-[280px] h-[360px] mx-auto overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
   </div>
+
+</div>
+
+<!-- MODAL -->
+<div id="overlay"
+class="hidden fixed inset-0 bg-black/70 flex items-center justify-center flex-col">
+
+  <img id="popupImg"
+  class="w-[280px] h-[360px] object-cover rounded-2xl">
+
+  <div class="bg-white text-black mt-4 w-[280px] p-4 rounded-xl text-center font-bold">
+    <div id="randomBox">0</div>
+  </div>
+
+  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+    Your code is ready ✅
+  </div>
+
+  <a id="ctaBox" href="YOUR_AFFILIATE_LINK"
+  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+    Continue Offer 🚀
+  </a>
 
 </div>
 
 <script>
 
 // DATE
-document.getElementById("date").innerText =
-new Date().toDateString();
+document.getElementById("date").innerText = new Date().toDateString();
 
-// LIVE USER COUNTER
+// USERS
 let base = 200 + Math.floor(Math.random() * 20);
 
-function updateUsers(){
-  let random = Math.floor(Math.random() * 20);
-  document.getElementById("users").innerText = base + random;
-}
+setInterval(() => {
+  document.getElementById("users").innerText =
+    base + Math.floor(Math.random() * 30);
+}, 1500);
 
-updateUsers();
-setInterval(updateUsers, 4000);
-
-// CARD SYSTEM
+// CARD IMAGE
 const params = new URLSearchParams(window.location.search);
 const card = params.get("card");
 
@@ -58,20 +74,48 @@ const data = {
 };
 
 const box = document.getElementById("selected");
+const overlay = document.getElementById("overlay");
+const popupImg = document.getElementById("popupImg");
+const randomBox = document.getElementById("randomBox");
+const resultBox = document.getElementById("resultBox");
+const ctaBox = document.getElementById("ctaBox");
 
 if(data[card]){
-  box.innerHTML = `
-    <img src="${data[card]}"
-    class="w-full h-full object-cover">
-  `;
+  box.innerHTML = <img src="${data[card]}" class="w-full h-full object-cover">;
 }
-else{
-  box.innerHTML = `
-    <div class="flex items-center justify-center h-full text-red-400">
-      No Card Selected
-    </div>
-  `;
-}
+
+// CLICK OPEN MODAL
+box.addEventListener("click", function () {
+
+  overlay.classList.remove("hidden");
+
+  let count = 0;
+  let target = Math.floor(Math.random() * 400) + 150;
+
+  let interval = setInterval(() => {
+    count += Math.floor(Math.random() * 20);
+
+    randomBox.innerText = count;
+
+    if (count >= target) {
+      clearInterval(interval);
+      resultBox.classList.remove("hidden");
+      ctaBox.classList.remove("hidden");
+    }
+
+  }, 60);
+
+});
+
+// CLOSE MODAL
+overlay.addEventListener("click", function (e) {
+  if (e.target === overlay) {
+    overlay.classList.add("hidden");
+    resultBox.classList.add("hidden");
+    ctaBox.classList.add("hidden");
+    randomBox.innerText = "0";
+  }
+});
 
 </script>
 
