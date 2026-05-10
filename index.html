@@ -20,6 +20,17 @@ body{
 .card:hover{
   transform: translateY(-8px);
 }
+  @keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+body{
+  background: linear-gradient(-45deg, #0b1020, #0ea5e9, #e0f2fe, #111827);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
 </style>
 </head>
 
