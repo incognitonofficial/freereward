@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeReward Offer</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+  background: linear-gradient(135deg,#0b1020,#111827,#0ea5e9);
+  font-family: sans-serif;
+}
+.card{
+  transition:0.3s;
+}
+</style>
+</head>
+
+<body class="text-white">
+
+<div class="max-w-6xl mx-auto px-6 py-10 text-center">
+
+  <h1 class="text-4xl font-bold mb-2">🎉 FreeReward Hub</h1>
+
+  <div class="text-gray-200 mb-6">
+    User Online: 201+ | Last update: <span id="date"></span>
+  </div>
+
+  <!-- SELECTED CARD -->
+  <div id="selected"
+  class="mx-auto w-full md:w-[320px] h-[360px] p-6 rounded-2xl border border-white/20 mb-6">
+
+  </div>
+
+  <!-- CTA BUTTON -->
+  <a id="cta" href="YOUR_CPA_LINK"
+  class="block bg-green-500 hover:bg-green-600 p-4 rounded-xl font-bold mb-10">
+    Continue Offer 🚀
+  </a>
+
+  <!-- OTHER CARDS -->
+  <div class="flex flex-col md:flex-row gap-6 justify-center">
+
+    <div class="card w-full md:w-[280px] h-[260px] bg-white/10 p-5 rounded-xl">
+      🎁 Daily Rewards
+    </div>
+
+    <div class="card w-full md:w-[280px] h-[260px] bg-white/10 p-5 rounded-xl">
+      ⚡ Fast Offers
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+// DATE
+document.getElementById("date").innerText =
+new Date().toDateString();
+
+// GET CARD PARAM
+const params = new URLSearchParams(window.location.search);
+const card = params.get("card");
+
+let box = document.getElementById("selected");
+
+if(card === "1"){
+  box.innerHTML = "🎁 <h2 class='text-2xl font-bold mt-2'>Daily Rewards</h2><p class='text-gray-300 mt-3'>Claim free rewards daily.</p>";
+  box.className += " bg-cyan-500/20";
+}
+
+else if(card === "2"){
+  box.innerHTML = "⚡ <h2 class='text-2xl font-bold mt-2'>Fast Offers</h2><p class='text-gray-300 mt-3'>Quick earning tasks.</p>";
+  box.className += " bg-purple-500/20";
+}
+
+else{
+  box.innerHTML = "🏆 <h2 class='text-2xl font-bold mt-2'>Winner System</h2><p class='text-gray-300 mt-3'>Top rewards system.</p>";
+  box.className += " bg-yellow-500/20";
+}
+
+</script>
+
+</body>
+</html>
