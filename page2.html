@@ -16,13 +16,13 @@
   <h1 class="text-5xl font-bold mb-2">🎉 FreeReward Hub</h1>
 
   <div class="text-gray-200 mb-10 text-sm md:text-base">
-    User Online: <span id="users"></span> |
+    User Online: <span id="users">200</span> |
     Last update: <span id="date"></span>
   </div>
 
-  <!-- MAIN IMAGE -->
+  <!-- CARD -->
   <div id="selected"
-  class="card w-[280px] h-[360px] mx-auto overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
+  class="w-[280px] h-[360px] mx-auto overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
   </div>
 
 </div>
@@ -51,70 +51,73 @@ class="hidden fixed inset-0 bg-black/70 flex items-center justify-center flex-co
 
 <script>
 
-// DATE
-document.getElementById("date").innerText = new Date().toDateString();
+document.addEventListener("DOMContentLoaded", function () {
 
-// USERS
-let base = 200 + Math.floor(Math.random() * 20);
+  // DATE
+  document.getElementById("date").innerText = new Date().toDateString();
 
-setInterval(() => {
-  document.getElementById("users").innerText =
-    base + Math.floor(Math.random() * 30);
-}, 1500);
+  // USERS SAFE
+  let base = 200;
 
-// CARD IMAGE
-const params = new URLSearchParams(window.location.search);
-const card = params.get("card");
+  setInterval(() => {
+    document.getElementById("users").innerText =
+      base + Math.floor(Math.random() * 30);
+  }, 1500);
 
-const data = {
-  "1": "roblox.jpeg",
-  "2": "roblox.jpeg",
-  "3": "roblox.jpeg",
-  "4": "roblox.jpeg"
-};
+  // CARD SYSTEM
+  const params = new URLSearchParams(window.location.search);
+  const card = params.get("card");
 
-const box = document.getElementById("selected");
-const overlay = document.getElementById("overlay");
-const popupImg = document.getElementById("popupImg");
-const randomBox = document.getElementById("randomBox");
-const resultBox = document.getElementById("resultBox");
-const ctaBox = document.getElementById("ctaBox");
+  const data = {
+    "1": "roblox.jpeg",
+    "2": "roblox.jpeg",
+    "3": "roblox.jpeg",
+    "4": "roblox.jpeg"
+  };
 
-if(data[card]){
-  box.innerHTML = <img src="${data[card]}" class="w-full h-full object-cover">;
-}
+  const box = document.getElementById("selected");
+  const overlay = document.getElementById("overlay");
+  const randomBox = document.getElementById("randomBox");
+  const resultBox = document.getElementById("resultBox");
+  const ctaBox = document.getElementById("ctaBox");
 
-// CLICK OPEN MODAL
-box.addEventListener("click", function () {
-
-  overlay.classList.remove("hidden");
-
-  let count = 0;
-  let target = Math.floor(Math.random() * 400) + 150;
-
-  let interval = setInterval(() => {
-    count += Math.floor(Math.random() * 20);
-
-    randomBox.innerText = count;
-
-    if (count >= target) {
-      clearInterval(interval);
-      resultBox.classList.remove("hidden");
-      ctaBox.classList.remove("hidden");
-    }
-
-  }, 60);
-
-});
-
-// CLOSE MODAL
-overlay.addEventListener("click", function (e) {
-  if (e.target === overlay) {
-    overlay.classList.add("hidden");
-    resultBox.classList.add("hidden");
-    ctaBox.classList.add("hidden");
-    randomBox.innerText = "0";
+  if(data[card]){
+    box.innerHTML = <img src="${data[card]}" class="w-full h-full object-cover">;
   }
+
+  // CLICK
+  box.addEventListener("click", function () {
+
+    overlay.classList.remove("hidden");
+
+    let count = 0;
+    let target = Math.floor(Math.random() * 400) + 150;
+
+    let interval = setInterval(() => {
+      count += Math.floor(Math.random() * 20);
+
+      randomBox.innerText = count;
+
+      if(count >= target){
+        clearInterval(interval);
+        resultBox.classList.remove("hidden");
+        ctaBox.classList.remove("hidden");
+      }
+
+    }, 60);
+
+  });
+
+  // CLOSE
+  overlay.addEventListener("click", function (e) {
+    if(e.target === overlay){
+      overlay.classList.add("hidden");
+      resultBox.classList.add("hidden");
+      ctaBox.classList.add("hidden");
+      randomBox.innerText = "0";
+    }
+  });
+
 });
 
 </script>
