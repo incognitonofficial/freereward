@@ -26,8 +26,7 @@ try {
   if (dateEl) dateEl.innerText = new Date().toDateString();
 
   // USER SAFE
-  let base = 200;
-
+let base = 200 + Math.floor(Math.random() * 20);
   setInterval(() => {
     const userEl = document.getElementById("users");
     if (userEl) {
