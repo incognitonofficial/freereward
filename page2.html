@@ -2,30 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Page 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeReward Offer</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-900 text-white text-center">
+<body class="text-white">
 
-<h1 class="text-5xl mt-6">🎉 FreeReward Hub</h1>
+<div class="max-w-6xl mx-auto px-6 py-10 text-center">
 
-<div class="mt-4 text-gray-300">
-User Online: <span id="users">0</span> |
-Last update: <span id="date">-</span>
+  <!-- TITLE -->
+  <h1 class="text-5xl font-bold mb-2">🎉 FreeReward Hub</h1>
+
+  <!-- LIVE INFO -->
+  <div class="text-gray-200 mb-10 text-sm md:text-base">
+    User Online: <span id="users"></span> |
+    Last update: <span id="date"></span>
+  </div>
+
+  <!-- SELECTED CARD -->
+  <div id="selected"
+  class="card w-full md:w-[280px] h-[360px] overflow-hidden rounded-2xl border border-white/10 mx-auto">
+  </div>
+
 </div>
-
-<div id="selected" class="mt-6"></div>
 
 <script>
 
-try {
+// DATE
+document.getElementById("date").innerText =
+new Date().toDateString();
 
-  // DATE SAFE
-  const dateEl = document.getElementById("date");
-  if (dateEl) dateEl.innerText = new Date().toDateString();
-
-  // FAKE LIVE USER COUNTER (realistic feel)
+// LIVE USER COUNTER
 let base = 200 + Math.floor(Math.random() * 20);
 
 function updateUsers(){
@@ -35,34 +45,32 @@ function updateUsers(){
 
 updateUsers();
 setInterval(updateUsers, 4000);
-});
 
-  // CARD SAFE
-  const params = new URLSearchParams(window.location.search);
-  const card = params.get("card");
+// CARD SYSTEM
+const params = new URLSearchParams(window.location.search);
+const card = params.get("card");
 
-  const data = {
-    "1": "roblox.jpeg",
-    "2": "roblox.jpeg",
-    "3": "roblox.jpeg",
-    "4": "roblox.jpeg"
-  };
+const data = {
+  "1": "roblox.jpeg",
+  "2": "roblox.jpeg",
+  "3": "roblox.jpeg",
+  "4": "roblox.jpeg"
+};
 
-  const box = document.getElementById("selected");
+const box = document.getElementById("selected");
 
-  if (box) {
-    if (data[card]) {
-      box.innerHTML = `
-        <img src="${data[card]}"
-        style="width:320px;height:350px;object-fit:cover;border-radius:16px;">
-      `;
-    } else {
-      box.innerHTML = "<p>No Card Selected</p>";
-    }
-  }
-
-} catch (err) {
-  console.log("PAGE2 ERROR:", err);
+if(data[card]){
+  box.innerHTML = `
+    <img src="${data[card]}"
+    class="w-full h-full object-cover">
+  `;
+}
+else{
+  box.innerHTML = `
+    <div class="flex items-center justify-center h-full text-red-400">
+      No Card Selected
+    </div>
+  `;
 }
 
 </script>
