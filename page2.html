@@ -85,7 +85,8 @@ const popupImg = document.getElementById("popupImg");
   // 🖱️ CLICK EVENT
   box.addEventListener("click", function () {
 
-    popupImg.src = "roblox.jpeg";
+    overlay.classList.remove("hidden");
+popupImg.src = "roblox.jpeg";
     
 function get4Digit() {
   return Math.floor(1000 + Math.random() * 9000);
