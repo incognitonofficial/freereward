@@ -1,55 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeReward Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white text-center">
+
+<h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
+
+<div class="mt-2 text-gray-300">
+User Online: <span id="users">200</span> |
+Last update: <span id="date"></span>
+</div>
+
+<!-- CARD -->
+<div id="selected"
+class="w-[280px] h-[360px] mx-auto mt-6 overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
+</div>
+
+<!-- MODAL -->
+<div id="overlay"
+class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
+
+  <img id="popupImg"
+  class="w-[280px] h-[360px] object-cover rounded-2xl">
+
+  <div class="bg-white text-black mt-4 w-[280px] p-3 rounded-xl font-bold text-2xl">
+    <div id="randomBox">0</div>
+  </div>
+
+  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+    Your code is ready ✅
+  </div>
+
+  <a id="ctaBox" href="https://www.google.com/"
+  target="_blank"
+  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+    Continue Offer 🚀
+  </a>
+
+</div>
+
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  // DATE
   document.getElementById("date").innerText = new Date().toDateString();
 
   // USERS
   let base = 200 + Math.floor(Math.random() * 20);
 
   function updateUsers(){
-    const el = document.getElementById("users");
-    let random = Math.floor(Math.random() * 20);
-    el.innerText = base + random;
+    document.getElementById("users").innerText =
+      base + Math.floor(Math.random() * 20);
   }
 
   updateUsers();
   setInterval(updateUsers, 4000);
 
-  // 🟢 FIX 1: URL CARD SYSTEM
+  // URL CARD SYSTEM
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card") || "1";
 
-  // 🟢 FIX 2: DATA MAP
+  // DATA MAP
   const data = {
     "1": "robloxcard.png",
     "2": "xboxgiftcard.png",
     "3": "fortnitecard.png",
-    "4": "minecrafrcard.png"
+    "4": "minecraftcard.png"
   };
 
-  // IMAGE LOAD
+  // MAIN CARD
   const box = document.getElementById("selected");
 
   box.innerHTML = `
-    <img src="${data[card]}"
+    <img src="${data[card] || 'robloxcard.png'}"
     class="w-full h-full object-cover">
   `;
 
-  // MODAL ELEMENTS
+  // ELEMENTS
   const overlay = document.getElementById("overlay");
+  const popupImg = document.getElementById("popupImg");
   const randomBox = document.getElementById("randomBox");
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
-  const popupImg = document.getElementById("popupImg");
 
-  // CLICK
+  // CLICK EVENT
   box.addEventListener("click", function () {
 
     overlay.classList.remove("hidden");
 
-    // 🟢 FIX 3: POPUP IMAGE MATCH CARD
-    popupImg.src = data[card];
+    popupImg.src = data[card] || "robloxcard.png";
 
     resultBox.classList.add("hidden");
     ctaBox.classList.add("hidden");
@@ -96,3 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+</body>
+</html>
