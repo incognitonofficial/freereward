@@ -4,115 +4,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FreeReward Hub</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-900 text-white text-center">
 
+<!-- TITLE -->
 <h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
 
+<!-- INFO -->
 <div class="mt-2 text-gray-300">
 User Online: <span id="users">200</span> |
 Last update: <span id="date"></span>
 </div>
 
-<!-- CARD -->
+<!-- IMAGE CARD -->
 <div id="selected"
 class="w-[280px] h-[360px] mx-auto mt-6 overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
 </div>
 
-<!-- OVERLAY -->
+<!-- MODAL -->
 <div id="overlay"
-class="hidden fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center">
+class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
+  
+  <img id="popupImg"
+  class="w-[280px] h-[360px] object-cover rounded-2xl">
 
-  <div class="flex flex-col items-center gap-4">
-
-    <img id="popupImg"
-    class="w-[280px] h-[360px] object-cover rounded-2xl">
-
-    <div class="bg-white text-black w-[280px] p-3 rounded-xl font-bold text-2xl">
-      <div id="randomBox">0</div>
-    </div>
-
-    <div id="resultBox"
-    class="hidden text-white text-xl font-bold">
-      Your code is ready ✅
-    </div>
-
-    <a id="ctaBox"
-    href="YOUR_AFFILIATE_LINK"
-    class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
-      Continue Offer 🚀
-    </a>
-
+  <div class="bg-white text-black mt-4 w-[280px] p-3 rounded-xl font-bold text-2xl">
+    <div id="randomBox">0</div>
   </div>
+
+  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+    Your code is ready ✅
+  </div>
+
+  <a id="ctaBox" href="YOUR_AFFILIATE_LINK"
+  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+    Continue Offer 🚀
+  </a>
 
 </div>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
-  // DATE
+  // 📅 DATE
   document.getElementById("date").innerText = new Date().toDateString();
 
-  // USERS
+  // 👥 USER COUNTER (SAFE + STABLE)
   let base = 200 + Math.floor(Math.random() * 20);
 
   function updateUsers(){
-    document.getElementById("users").innerText =
-      base + Math.floor(Math.random() * 20);
+    const el = document.getElementById("users");
+    if (!el) return;
+
+    let random = Math.floor(Math.random() * 20);
+    el.innerText = base + random;
   }
 
   updateUsers();
   setInterval(updateUsers, 4000);
 
-  // CARD IMAGE
+  // 🖼️ IMAGE LOAD
   const box = document.getElementById("selected");
-  box.innerHTML = <img src="roblox.jpeg" class="w-full h-full object-cover">;
 
-  // ELEMENTS
+  box.innerHTML = `
+    <img src="roblox.jpeg"
+    class="w-full h-full object-cover">
+  `;
+
+  // 🎯 MODAL ELEMENTS
   const overlay = document.getElementById("overlay");
-  const popupImg = document.getElementById("popupImg");
   const randomBox = document.getElementById("randomBox");
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
-
-  // CLICK
+const popupImg = document.getElementById("popupImg");
+  
+  // 🖱️ CLICK EVENT
   box.addEventListener("click", function () {
 
     overlay.classList.remove("hidden");
-    popupImg.src = "roblox.jpeg";
+popupImg.src = "roblox.jpeg";
+    
+function get4Digit() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
+let step = 0;
+let maxSteps = 25; // fixed duration
 
-    function get4Digit(){
-      return Math.floor(1000 + Math.random() * 9000);
-    }
+let interval = setInterval(() => {
 
-    let step = 0;
-    let maxSteps = 25;
+  randomBox.innerText =
+    get4Digit() + " " +
+    get4Digit() + " " +
+    get4Digit() + " " +
+    get4Digit();
 
-    let interval = setInterval(() => {
+  step++;
 
-      randomBox.innerText =
-        get4Digit()+" "+get4Digit()+" "+get4Digit()+" "+get4Digit();
+  if (step >= maxSteps) {
+    clearInterval(interval);
 
-      step++;
+    resultBox.classList.remove("hidden");
+    ctaBox.classList.remove("hidden");
+  }
 
-      if(step >= maxSteps){
-        clearInterval(interval);
-
-        setTimeout(() => {
-          resultBox.classList.remove("hidden");
-          ctaBox.classList.remove("hidden");
-        }, 400);
-      }
-
-    }, 200);
+}, 200);
 
   });
 
-  // CLOSE
-  overlay.addEventListener("click", function(e){
-    if(e.target === overlay){
+  // ❌ CLOSE MODAL
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
       overlay.classList.add("hidden");
       resultBox.classList.add("hidden");
       ctaBox.classList.add("hidden");
@@ -121,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
 </script>
 
 </body>
