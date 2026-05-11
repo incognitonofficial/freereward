@@ -1,67 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FreeReward Hub</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-gray-900 text-white text-center">
-
-<!-- TITLE -->
-<h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
-
-<!-- INFO -->
-<div class="mt-2 text-gray-300">
-User Online: <span id="users">200</span> |
-Last update: <span id="date"></span>
-</div>
-
-<!-- IMAGE CARD -->
-<div id="selected"
-class="w-[280px] h-[360px] mx-auto mt-6 overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
-</div>
-
-<!-- MODAL -->
-<div id="overlay"
-class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
-  
-  <img id="popupImg"
-  class="w-[280px] h-[360px] object-cover rounded-2xl">
-
-  <div class="bg-white text-black mt-4 w-[280px] p-3 rounded-xl font-bold text-2xl">
-    <div id="randomBox">0</div>
-  </div>
-
-  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
-    Your code is ready ✅
-  </div>
-
-<a id="ctaBox"
-href="https://www.google.com/"
-target="_blank"
-class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
-  Continue Offer 🚀
-</a>
-
-</div>
-
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // 📅 DATE
   document.getElementById("date").innerText = new Date().toDateString();
 
-  // 👥 USER COUNTER (SAFE + STABLE)
+  // USERS
   let base = 200 + Math.floor(Math.random() * 20);
 
   function updateUsers(){
     const el = document.getElementById("users");
-    if (!el) return;
-
     let random = Math.floor(Math.random() * 20);
     el.innerText = base + random;
   }
@@ -69,55 +16,74 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUsers();
   setInterval(updateUsers, 4000);
 
-  // 🖼️ IMAGE LOAD
+  // 🟢 FIX 1: URL CARD SYSTEM
+  const params = new URLSearchParams(window.location.search);
+  const card = params.get("card") || "1";
+
+  // 🟢 FIX 2: DATA MAP
+  const data = {
+    "1": "robloxcard.png",
+    "2": "robloxcard2.png",
+    "3": "robloxcard3.png",
+    "4": "robloxcard4.png"
+  };
+
+  // IMAGE LOAD
   const box = document.getElementById("selected");
 
   box.innerHTML = `
-    <img src="robloxcard.png"
+    <img src="${data[card]}"
     class="w-full h-full object-cover">
   `;
 
-  // 🎯 MODAL ELEMENTS
+  // MODAL ELEMENTS
   const overlay = document.getElementById("overlay");
   const randomBox = document.getElementById("randomBox");
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
-const popupImg = document.getElementById("popupImg");
-  
-  // 🖱️ CLICK EVENT
+  const popupImg = document.getElementById("popupImg");
+
+  // CLICK
   box.addEventListener("click", function () {
 
     overlay.classList.remove("hidden");
-popupImg.src = "robloxcard.png";
-    
-function get4Digit() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
-let step = 0;
-let maxSteps = 25; // fixed duration
 
-let interval = setInterval(() => {
+    // 🟢 FIX 3: POPUP IMAGE MATCH CARD
+    popupImg.src = data[card];
 
-  randomBox.innerText =
-    get4Digit() + " " +
-    get4Digit() + " " +
-    get4Digit() + " " +
-    get4Digit();
+    resultBox.classList.add("hidden");
+    ctaBox.classList.add("hidden");
+    randomBox.innerText = "0";
 
-  step++;
+    function get4Digit() {
+      return Math.floor(1000 + Math.random() * 9000);
+    }
 
-  if (step >= maxSteps) {
-    clearInterval(interval);
+    let step = 0;
+    let maxSteps = 25;
 
-    resultBox.classList.remove("hidden");
-    ctaBox.classList.remove("hidden");
-  }
+    let interval = setInterval(() => {
 
-}, 200);
+      randomBox.innerText =
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit();
+
+      step++;
+
+      if (step >= maxSteps) {
+        clearInterval(interval);
+
+        resultBox.classList.remove("hidden");
+        ctaBox.classList.remove("hidden");
+      }
+
+    }, 200);
 
   });
 
-  // ❌ CLOSE MODAL
+  // CLOSE
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay) {
       overlay.classList.add("hidden");
@@ -130,6 +96,3 @@ let interval = setInterval(() => {
 });
 
 </script>
-
-</body>
-</html>
