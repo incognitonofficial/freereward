@@ -8,52 +8,61 @@
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-900 text-white text-center">
+<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen text-center">
 
 <!-- TITLE -->
-<h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
+<h1 class="text-4xl md:text-5xl font-bold pt-8">
+  🎉 FreeReward Hub
+</h1>
 
 <!-- INFO -->
 <div class="mt-2 text-gray-300">
-User Online: <span id="users">200</span> |
-Last update: <span id="date"></span>
+  User Online: <span id="users">200</span> |
+  Last update: <span id="date"></span>
 </div>
 
-<!-- MAIN CARD (same style as index) -->
+<!-- MAIN CARD -->
 <div id="selected"
-class="card w-full max-w-[220px] h-[320px] mx-auto mt-8 overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
+class="card w-full max-w-[220px] h-[320px] mx-auto mt-8 overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20 shadow-2xl">
 </div>
 
-<div id="grid" class="grid grid-cols-3 gap-4 mt-10 max-w-4xl mx-auto"></div>
-  
+<!-- 3 CARDS GRID -->
+<div id="grid"
+class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center max-w-4xl mx-auto mt-12 px-4">
+</div>
+
 <!-- MODAL -->
 <div id="overlay"
-class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
+class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center px-4">
 
   <img id="popupImg"
-  class="w-full max-w-[220px] h-[320px] object-contain bg-black/20 rounded-2xl">
+  class="w-full max-w-[220px] h-[320px] object-contain bg-black/20 rounded-2xl shadow-2xl">
 
   <div class="bg-white text-black mt-4 w-[220px] p-3 rounded-xl font-bold text-2xl">
     <div id="randomBox">0</div>
   </div>
 
-  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+  <div id="resultBox"
+  class="hidden text-white mt-3 text-xl font-bold">
     Your code is ready ✅
   </div>
 
-  <a id="ctaBox" href="https://www.google.com/"
+  <a id="ctaBox"
+  href="https://www.google.com/"
   target="_blank"
-  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+  class="hidden mt-4 bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl font-bold transition">
     Continue Offer 🚀
   </a>
 
 </div>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
   // DATE
-  document.getElementById("date").innerText = new Date().toDateString();
+  document.getElementById("date").innerText =
+    new Date().toDateString();
 
   // USERS
   let base = 200;
@@ -66,99 +75,156 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUsers();
   setInterval(updateUsers, 4000);
 
-  // =====================
-  // MAIN CARD SYSTEM
-  // =====================
+  // URL PARAM
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card") || "1";
 
+  // MAIN CARD DATA
   const dataMain = {
     "1": "robloxcard.png",
     "2": "xboxgiftcard.png",
     "3": "fortnitecard.png",
-    "4": "minecraftcard.png",
+    "4": "minecrafrcard.png",
     "5": "playstationgiftcard.png",
     "6": "googlegiftcard.png"
   };
 
+  // MAIN CARD SHOW
   const box = document.getElementById("selected");
 
   box.innerHTML = `
-    <img src="${dataMain[card] || 'robloxcard.png'}"
-    class="w-full h-full object-contain bg-black/20">
+    <img src="${dataMain[card]}"
+    class="w-full h-full object-cover">
   `;
 
-  // =====================
-  // POPUP SYSTEM
-  // =====================
+  // GRID DATA
+  const dataGrid = {
+
+    "1": [
+      "roblox25.png",
+      "robloxcard.png",
+      "roblox25.png"
+    ],
+
+    "2": [
+      "xboxgiftcard.png",
+      "xboxgiftcard.png",
+      "xboxgiftcard.png"
+    ],
+
+    "3": [
+      "fortnitecard.png",
+      "fortnitecard.png",
+      "fortnitecard.png"
+    ],
+
+    "4": [
+      "minecrafrcard.png",
+      "minecrafrcard.png",
+      "minecrafrcard.png"
+    ],
+
+    "5": [
+      "playstationgiftcard.png",
+      "playstationgiftcard.png",
+      "playstationgiftcard.png"
+    ],
+
+    "6": [
+      "googlegiftcard.png",
+      "googlegiftcard.png",
+      "googlegiftcard.png"
+    ]
+
+  };
+
+  // GRID RENDER
+  const grid = document.getElementById("grid");
+
+  if(dataGrid[card]){
+
+    dataGrid[card].forEach(img => {
+
+      grid.innerHTML += `
+        <div onclick="selectCard('${img}')"
+        class="cursor-pointer w-full max-w-[180px] h-[240px] overflow-hidden rounded-xl border border-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+
+          <img src="${img}"
+          class="w-full h-full object-cover">
+
+        </div>
+      `;
+
+    });
+
+  }
+
+  // MODAL ELEMENTS
   const overlay = document.getElementById("overlay");
   const popupImg = document.getElementById("popupImg");
   const randomBox = document.getElementById("randomBox");
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
 
-  box.addEventListener("click", function () {
+  // GLOBAL FUNCTION
+  window.selectCard = function(img){
 
     overlay.classList.remove("hidden");
-    popupImg.src = dataMain[card];
+
+    popupImg.src = img;
 
     resultBox.classList.add("hidden");
     ctaBox.classList.add("hidden");
 
+    randomBox.innerText = "0";
+
+    function get4Digit(){
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
     let step = 0;
+
     let interval = setInterval(() => {
 
-      randomBox.innerText = Math.floor(1000 + Math.random() * 9000);
+      randomBox.innerText =
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit();
 
       step++;
-      if(step > 25){
+
+      if(step >= 25){
+
         clearInterval(interval);
+
         resultBox.classList.remove("hidden");
         ctaBox.classList.remove("hidden");
+
       }
 
-    }, 100);
+    }, 120);
 
-  });
+  };
 
-  overlay.addEventListener("click", function (e) {
+  // CLOSE MODAL
+  overlay.addEventListener("click", function(e){
+
     if(e.target === overlay){
+
       overlay.classList.add("hidden");
+
       resultBox.classList.add("hidden");
       ctaBox.classList.add("hidden");
+
+      randomBox.innerText = "0";
+
     }
+
   });
 
-  // =====================
-  // GRID SYSTEM (PAGE 2 LOGIC)
-  // =====================
-  const mainType = params.get("main");
-
-  if(mainType){
-
-    const dataGrid = {
-      roblox: ["roblox25.png","roblox2.png","roblox3.png"],
-      xbox: ["xbox1.png","xbox2.png","xbox3.png"],
-      fortnite: ["fortnite1.png","fortnite2.png","fortnite3.png"]
-    };
-
-    const grid = document.getElementById("grid");
-
-    if(grid && dataGrid[mainType]){
-
-      dataGrid[mainType].forEach(img => {
-        grid.innerHTML += `
-          <div onclick="alert('Selected: ${img}')"
-          class="cursor-pointer w-[180px] h-[240px] overflow-hidden rounded-xl border border-white/10 hover:scale-105 transition">
-            <img src="${img}" class="w-full h-full object-cover">
-          </div>
-        `;
-      });
-
-    }
-  }
-
 });
+
 </script>
 
 </body>
