@@ -4,79 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FreeReward Hub</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white text-center">
 
-<div class="max-w-6xl mx-auto px-6 py-10 text-center">
+<h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
 
-  <!-- TITLE -->
-  <h1 class="text-5xl font-bold mb-2">🎉 FreeReward Hub</h1>
+<div class="mt-2 text-gray-300">
+User Online: <span id="users">200</span> |
+Last update: <span id="date"></span>
+</div>
 
-  <!-- LIVE INFO -->
-  <div class="text-gray-200 mb-10 text-sm md:text-base">
-    User Online: <span id="users"></span> | Last update: <span id="date"></span>
+<!-- CARD -->
+<div id="selected"
+class="w-[280px] h-[360px] mx-auto mt-6 overflow-hidden rounded-2xl border border-white/10 cursor-pointer">
+</div>
+
+<!-- MODAL -->
+<div id="overlay"
+class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
+
+  <img id="popupImg"
+  class="w-[280px] h-[360px] object-cover rounded-2xl">
+
+  <div class="bg-white text-black mt-4 w-[280px] p-3 rounded-xl font-bold text-2xl">
+    <div id="randomBox">0</div>
   </div>
 
-  <!-- CARDS GRID FIXED -->
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-
-    <!-- CARD 1 -->
-    <a href="page2.html?main=roblox">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="robloxcard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
-    <!-- CARD 2 -->
-    <a href="page2.html?main=xbox">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="xboxgiftcard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
-    <!-- CARD 3 -->
-    <a href="page2.html?main=fortnite">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="fortnitecard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
-    <!-- CARD 4 -->
-    <a href="page2.html?main=minecraft">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="minecrafrcard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
-    <!-- CARD 5 -->
-    <a href="page2.html?main=playstation">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="playstationgiftcard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
-    <!-- CARD 6 -->
-    <a href="page2.html?main=google">
-      class="card w-full max-w-[220px] h-[320px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
-      <img src="googlegiftcard.png" class="w-full h-full object-contain bg-black/20">
-    </a>
-
+  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+    Your code is ready ✅
   </div>
+
+  <a id="ctaBox" href="https://www.google.com/"
+  target="_blank"
+  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+    Continue Offer 🚀
+  </a>
 
 </div>
 
-<!-- SCRIPT -->
 <script>
-document.getElementById("date").innerText = new Date().toDateString();
 
-let base = 200;
+document.addEventListener("DOMContentLoaded", function () {
 
-function updateUsers(){
-  document.getElementById("users").innerText =
-    base + Math.floor(Math.random() * 20);
-}
+  // DATE
+  document.getElementById("date").innerText = new Date().toDateString();
 
-updateUsers();
-setInterval(updateUsers, 4000);
+  // USERS
+  let base = 200 + Math.floor(Math.random() * 20);
+
+  function updateUsers(){
+    document.getElementById("users").innerText =
+      base + Math.floor(Math.random() * 20);
+  }
+
+  updateUsers();
+  setInterval(updateUsers, 4000);
+
+  // URL CARD SYSTEM
+  const params = new URLSearchParams(window.location.search);
+  const card = params.get("card") || "1";
+
+  // DATA MAP
+  const data = {
+    "1": "robloxcard.png",
+    "2": "xboxgiftcard.png",
+    "3": "fortnitecard.png",
+    "4": "minecraftcard.png",
+    "5": "playstationgiftcard.png",
+    "6": "googlegiftcard.png"
+  };
+
+  // MAIN CARD
+  const box = document.getElementById("selected");
+
+  box.innerHTML = `
+    <img src="${data[card] || 'robloxcard.png'}"
+    class="w-full h-full object-cover">
+  `;
+
+  // ELEMENTS
+  const overlay = document.getElementById("overlay");
+  const popupImg = document.getElementById("popupImg");
+  const randomBox = document.getElementById("randomBox");
+  const resultBox = document.getElementById("resultBox");
+  const ctaBox = document.getElementById("ctaBox");
+
+  // CLICK EVENT
+  box.addEventListener("click", function () {
+
+    overlay.classList.remove("hidden");
+
+    popupImg.src = data[card] || "robloxcard.png";
+
+    resultBox.classList.add("hidden");
+    ctaBox.classList.add("hidden");
+    randomBox.innerText = "0";
+
+    function get4Digit() {
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    let step = 0;
+    let maxSteps = 25;
+
+    let interval = setInterval(() => {
+
+      randomBox.innerText =
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit();
+
+      step++;
+
+      if (step >= maxSteps) {
+        clearInterval(interval);
+
+        resultBox.classList.remove("hidden");
+        ctaBox.classList.remove("hidden");
+      }
+
+    }, 200);
+
+  });
+
+  // CLOSE
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      overlay.classList.add("hidden");
+      resultBox.classList.add("hidden");
+      ctaBox.classList.add("hidden");
+      randomBox.innerText = "0";
+    }
+  });
+
+});
+
 </script>
 
 </body>
