@@ -30,19 +30,24 @@ class="hidden fixed inset-0 bg-black/95 z-[9999] flex items-center justify-cente
 
   <div class="flex flex-col items-center gap-4">
 
+    <!-- IMAGE -->
     <img id="popupImg"
     class="w-[280px] h-[360px] object-cover rounded-2xl">
 
+    <!-- NUMBER BOX -->
     <div class="bg-white text-black w-[280px] p-3 rounded-xl font-bold text-2xl">
       <div id="randomBox">0</div>
     </div>
 
+    <!-- RESULT -->
     <div id="resultBox"
     class="hidden text-white text-xl font-bold">
       Your code is ready ✅
     </div>
 
+    <!-- BUTTON -->
     <a id="ctaBox"
+    href="YOUR_AFFILIATE_LINK"
     class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
       Continue Offer 🚀
     </a>
@@ -88,37 +93,41 @@ document.addEventListener("DOMContentLoaded", function () {
 const popupImg = document.getElementById("popupImg");
   
   // 🖱️ CLICK EVENT
-  box.addEventListener("click", function () {
+box.addEventListener("click", function () {
 
-    overlay.classList.remove("hidden");
-popupImg.src = "roblox.jpeg";
-    
-function get4Digit() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
-let step = 0;
-let maxSteps = 25; // fixed duration
+  overlay.classList.remove("hidden");
 
-let interval = setInterval(() => {
+  popupImg.src = "roblox.jpeg";
 
-  randomBox.innerText =
-    get4Digit() + " " +
-    get4Digit() + " " +
-    get4Digit() + " " +
-    get4Digit();
-
-  step++;
-
-  if (step >= maxSteps) {
-    clearInterval(interval);
-
-    resultBox.classList.remove("hidden");
-    ctaBox.classList.remove("hidden");
+  function get4Digit() {
+    return Math.floor(1000 + Math.random() * 9000);
   }
 
-}, 200);
+  let step = 0;
+  let maxSteps = 25;
 
-  });
+  let interval = setInterval(() => {
+
+    randomBox.innerText =
+      get4Digit() + " " +
+      get4Digit() + " " +
+      get4Digit() + " " +
+      get4Digit();
+
+    step++;
+
+    if (step >= maxSteps) {
+      clearInterval(interval);
+
+      setTimeout(() => {
+        resultBox.classList.remove("hidden");
+        ctaBox.classList.remove("hidden");
+      }, 400);
+    }
+
+  }, 200);
+
+});
 
   // ❌ CLOSE MODAL
   overlay.addEventListener("click", function (e) {
