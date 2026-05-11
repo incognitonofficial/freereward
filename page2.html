@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const box = document.getElementById("selected");
 
   box.innerHTML = `
-    <img src="roblox.jpeg"
+    <img src="robloxcard.png"
     class="w-full h-full object-cover">
   `;
 
@@ -88,7 +88,7 @@ const popupImg = document.getElementById("popupImg");
   box.addEventListener("click", function () {
 
     overlay.classList.remove("hidden");
-popupImg.src = "roblox.jpeg";
+popupImg.src = "robloxcard.png";
     
 function get4Digit() {
   return Math.floor(1000 + Math.random() * 9000);
