@@ -21,14 +21,9 @@
   Last update: <span id="date"></span>
 </div>
 
-<!-- MAIN CARD -->
-<div id="selected"
-class="card w-full max-w-[220px] h-[320px] mx-auto mt-8 overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20 shadow-2xl">
-</div>
-
 <!-- 3 CARDS GRID -->
 <div id="grid"
-class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center max-w-4xl mx-auto mt-12 px-4">
+class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center max-w-4xl mx-auto mt-6 px-4">
 </div>
 
 <!-- MODAL -->
@@ -78,24 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // URL PARAM
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card") || "1";
-
-  // MAIN CARD DATA
-  const dataMain = {
-    "1": "robloxcard.png",
-    "2": "xboxgiftcard.png",
-    "3": "fortnitecard.png",
-    "4": "minecrafrcard.png",
-    "5": "playstationgiftcard.png",
-    "6": "googlegiftcard.png"
-  };
-
-  // MAIN CARD SHOW
-  const box = document.getElementById("selected");
-
-  box.innerHTML = `
-    <img src="${dataMain[card]}"
-    class="w-full h-full object-cover">
-  `;
 
   // GRID DATA
   const dataGrid = {
@@ -166,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
 
-  // GLOBAL FUNCTION
+  // SELECT CARD
   window.selectCard = function(img){
 
     overlay.classList.remove("hidden");
