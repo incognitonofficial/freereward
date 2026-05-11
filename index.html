@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="text-white">
+<body>
 
 <div class="max-w-6xl mx-auto px-6 py-10 text-center">
 
@@ -21,52 +21,38 @@
     User Online: <span id="users"></span> | Last update: <span id="date"></span>
   </div>
 
-  <!-- CARDS -->
+  <!-- CARDS GRID -->
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto place-items-center">
 
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-6 justify-items-center max-w-6xl mx-auto">
-  
-<a href="page2.html?card=1"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+    <!-- CARD 1 -->
+    <a href="page2.html?card=1" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="robloxcard.png" class="w-full h-full object-cover">
+    </a>
 
-  <img src="robloxcard.png" class="w-full h-full object-cover">
+    <!-- CARD 2 -->
+    <a href="page2.html?card=2" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="xboxgiftcard.png" class="w-full h-full object-cover">
+    </a>
 
-</a>
+    <!-- CARD 3 -->
+    <a href="page2.html?card=3" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="fortnitecard.png" class="w-full h-full object-cover">
+    </a>
 
-<a href="page2.html?card=2"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+    <!-- CARD 4 -->
+    <a href="page2.html?card=4" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="minecrafrcard.png" class="w-full h-full object-cover">
+    </a>
 
-  <img src="xboxgiftcard.png" class="w-full h-full object-cover">
+    <!-- CARD 5 -->
+    <a href="page2.html?card=5" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="playstationgiftcard.png" class="w-full h-full object-cover">
+    </a>
 
-</a>
-
-
-<a href="page2.html?card=3"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
-  <img src="fortnitecard.png" class="w-full h-full object-cover">
-
-</a>
-
-
-<a href="page2.html?card=4"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
-
-  <img src="minecrafrcard.png" class="w-full h-full object-cover">
-
-</a>
-
-<a href="page2.html?card=5"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
-
-  <img src="playstationgiftcard.png" class="w-full h-full object-cover">
-
-</a>
-
-<a href="page2.html?card=6"
-class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
-
-  <img src="googlegiftcard.png" class="w-full h-full object-cover">
-
-</a>
+    <!-- CARD 6 -->
+    <a href="page2.html?card=6" class="card w-full md:w-[300px] h-[360px] overflow-hidden rounded-2xl border border-white/10">
+      <img src="googlegiftcard.png" class="w-full h-full object-cover">
+    </a>
 
   </div>
 
@@ -74,22 +60,17 @@ class="card relative z-0 transition-all duration-300 hover:scale-105 hover:z-20 
 
 <!-- SCRIPT -->
 <script>
+document.getElementById("date").innerText = new Date().toDateString();
 
-// DATE (auto update)
-document.getElementById("date").innerText =
-new Date().toDateString();
-
-// FAKE LIVE USER COUNTER (realistic feel)
 let base = 200;
 
 function updateUsers(){
-  let random = Math.floor(Math.random() * 20); // 200–220 range
-  document.getElementById("users").innerText = base + random;
+  document.getElementById("users").innerText =
+    base + Math.floor(Math.random() * 20);
 }
 
 updateUsers();
 setInterval(updateUsers, 4000);
-
 </script>
 
 </body>
