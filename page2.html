@@ -24,6 +24,8 @@ Last update: <span id="date"></span>
 class="card w-full max-w-[220px] h-[320px] mx-auto mt-8 overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
 </div>
 
+<div id="grid" class="grid grid-cols-3 gap-4 mt-10 max-w-4xl mx-auto"></div>
+  
 <!-- MODAL -->
 <div id="overlay"
 class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
@@ -137,6 +139,31 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+const params = new URLSearchParams(window.location.search);
+const main = params.get("main") || "roblox";
+
+const data = {
+  roblox: ["roblox1.png","roblox2.png","roblox3.png"],
+  xbox: ["xbox1.png","xbox2.png","xbox3.png"],
+  fortnite: ["fortnite1.png","fortnite2.png","fortnite3.png"]
+};
+
+const grid = document.getElementById("grid");
+
+data[main].forEach(img => {
+  grid.innerHTML += `
+    <div onclick="selectCard('${img}')"
+    class="cursor-pointer w-[180px] h-[240px] overflow-hidden rounded-xl border border-white/10 hover:scale-105 transition">
+      <img src="${img}" class="w-full h-full object-cover">
+    </div>
+  `;
+});
+
+function selectCard(img){
+  alert("Selected: " + img);
+}
+  
 </script>
 
 </body>
