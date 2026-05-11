@@ -1,7 +1,7 @@
 <style>
 body{
   margin:0;
-  font-family: sans-serif;
+  font-family: 'Black Han Sans', sans-serif;
   background: linear-gradient(-45deg, #0b1020, #0d1b2a, #0a0f1c, #111827);
   background-size: 400% 400%;
   animation: gradientMove 20s ease infinite;
