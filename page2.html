@@ -50,7 +50,6 @@ class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center just
 </div>
 
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
 
   // DATE
@@ -67,11 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
   updateUsers();
   setInterval(updateUsers, 4000);
 
-  // CARD SYSTEM
+  // =====================
+  // MAIN CARD SYSTEM
+  // =====================
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card") || "1";
 
-  const data = {
+  const dataMain = {
     "1": "robloxcard.png",
     "2": "xboxgiftcard.png",
     "3": "fortnitecard.png",
@@ -83,10 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const box = document.getElementById("selected");
 
   box.innerHTML = `
-    <img src="${data[card] || 'robloxcard.png'}"
+    <img src="${dataMain[card] || 'robloxcard.png'}"
     class="w-full h-full object-contain bg-black/20">
   `;
 
+  // =====================
+  // POPUP SYSTEM
+  // =====================
   const overlay = document.getElementById("overlay");
   const popupImg = document.getElementById("popupImg");
   const randomBox = document.getElementById("randomBox");
@@ -96,36 +100,24 @@ document.addEventListener("DOMContentLoaded", function () {
   box.addEventListener("click", function () {
 
     overlay.classList.remove("hidden");
-    popupImg.src = data[card] || "robloxcard.png";
+    popupImg.src = dataMain[card];
 
     resultBox.classList.add("hidden");
     ctaBox.classList.add("hidden");
-    randomBox.innerText = "0";
-
-    function get4Digit(){
-      return Math.floor(1000 + Math.random() * 9000);
-    }
 
     let step = 0;
-    let maxSteps = 25;
-
     let interval = setInterval(() => {
 
-      randomBox.innerText =
-        get4Digit() + " " +
-        get4Digit() + " " +
-        get4Digit() + " " +
-        get4Digit();
+      randomBox.innerText = Math.floor(1000 + Math.random() * 9000);
 
       step++;
-
-      if(step >= maxSteps){
+      if(step > 25){
         clearInterval(interval);
         resultBox.classList.remove("hidden");
         ctaBox.classList.remove("hidden");
       }
 
-    }, 200);
+    }, 100);
 
   });
 
@@ -134,36 +126,39 @@ document.addEventListener("DOMContentLoaded", function () {
       overlay.classList.add("hidden");
       resultBox.classList.add("hidden");
       ctaBox.classList.add("hidden");
-      randomBox.innerText = "0";
     }
   });
 
+  // =====================
+  // GRID SYSTEM (PAGE 2 LOGIC)
+  // =====================
+  const mainType = params.get("main");
+
+  if(mainType){
+
+    const dataGrid = {
+      roblox: ["roblox1.png","roblox2.png","roblox3.png"],
+      xbox: ["xbox1.png","xbox2.png","xbox3.png"],
+      fortnite: ["fortnite1.png","fortnite2.png","fortnite3.png"]
+    };
+
+    const grid = document.getElementById("grid");
+
+    if(grid && dataGrid[mainType]){
+
+      dataGrid[mainType].forEach(img => {
+        grid.innerHTML += `
+          <div onclick="alert('Selected: ${img}')"
+          class="cursor-pointer w-[180px] h-[240px] overflow-hidden rounded-xl border border-white/10 hover:scale-105 transition">
+            <img src="${img}" class="w-full h-full object-cover">
+          </div>
+        `;
+      });
+
+    }
+  }
+
 });
-
-const params = new URLSearchParams(window.location.search);
-const main = params.get("main") || "roblox";
-
-const data = {
-  roblox: ["roblox1.png","roblox2.png","roblox3.png"],
-  xbox: ["xbox1.png","xbox2.png","xbox3.png"],
-  fortnite: ["fortnite1.png","fortnite2.png","fortnite3.png"]
-};
-
-const grid = document.getElementById("grid");
-
-data[main].forEach(img => {
-  grid.innerHTML += `
-    <div onclick="selectCard('${img}')"
-    class="cursor-pointer w-[180px] h-[240px] overflow-hidden rounded-xl border border-white/10 hover:scale-105 transition">
-      <img src="${img}" class="w-full h-full object-cover">
-    </div>
-  `;
-});
-
-function selectCard(img){
-  alert("Selected: " + img);
-}
-  
 </script>
 
 </body>
