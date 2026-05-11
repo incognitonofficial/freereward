@@ -92,19 +92,19 @@ function get4Digit() {
   return Math.floor(1000 + Math.random() * 9000);
 }
 let step = 0;
-let maxSteps = 40; // kitni dafa change hoga
-    
+let maxSteps = 25; // fixed duration
+
 let interval = setInterval(() => {
 
-  // 4 DIGITS EACH TIME (like IP blocks)
   randomBox.innerText =
     get4Digit() + " " +
     get4Digit() + " " +
     get4Digit() + " " +
     get4Digit();
 
-  // stop condition
-  if (Math.random() > 0.8) {
+  step++;
+
+  if (step >= maxSteps) {
     clearInterval(interval);
 
     resultBox.classList.remove("hidden");
