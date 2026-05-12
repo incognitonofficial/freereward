@@ -23,7 +23,7 @@ body {
     padding: 30px 20px 40px 20px;
 }
 
-/* ہیڈر - سینٹر میں */
+/* ہیڈر */
 .main-header {
     display: flex;
     align-items: center;
@@ -32,20 +32,10 @@ body {
     margin-bottom: 30px;
 }
 
-.logo {
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    width: 65px;
-    height: 65px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 15px rgba(37,99,235,0.2);
-}
-
-.logo i {
-    font-size: 34px;
-    color: white;
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .site-name {
@@ -55,7 +45,6 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    letter-spacing: -0.5px;
 }
 
 /* پینل */
@@ -66,7 +55,7 @@ body {
     background: #f1f5f9;
     padding: 15px 25px;
     border-radius: 60px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
     gap: 15px;
 }
@@ -88,21 +77,20 @@ body {
     font-size: 1.3rem;
 }
 
-/* کارڈز والی قطار - اب 5 کارڈز ایک ہی قطار میں آئیں گے */
+/* کارڈز */
 .cards-row {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;      /* 5وں کو ایک ہی لائن میں رکھے گا */
-    gap: 20px;
-    overflow-x: auto;       /* اگر سکرین بہت چھوٹی ہو تو سکرول ہو جائے */
-    padding: 10px 5px;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 20px 0;
 }
 
 .card {
-    flex: 0 0 180px;        /* ہر کارڈ کی چوڑائی 180px - یقینی بنائی گئی */
+    flex: 0 1 180px;
     background: #ffffff;
     border-radius: 24px;
-    padding: 25px 12px;
+    padding: 20px 12px;
     min-height: 180px;
     display: flex;
     flex-direction: column;
@@ -111,6 +99,7 @@ body {
     box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1);
     border: 1px solid #e2e8f0;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -118,55 +107,151 @@ body {
     box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
 }
 
-/* جب کارڈز خالی ہوں تو کم از کم ایک placeholder دکھے (اختیاری) */
-.card:empty::before {
-    content: "✨";
-    font-size: 40px;
-    opacity: 0.4;
-}
-
-/* آپ کی اپنی تصاویر اور متن کے لیے */
 .card img {
     width: 100%;
-    max-width: 120px;
-    margin-bottom: 15px;
+    max-width: 130px;
     border-radius: 12px;
+    margin-bottom: 10px;
 }
 
-.card p, .card h3, .card span {
+.price-tag {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2563eb;
+    margin-top: 8px;
+}
+
+/* انتخاب کا عنوان */
+.selection-title {
     text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
     color: #1e293b;
 }
 
-/* موبائل اور چھوٹی سکرینوں کے لیے: اگر 5 کارڈز ایک ساتھ نہ آ سکیں تو سکرول ہو جائے گا (ٹوٹے گا نہیں) */
-@media (max-width: 1050px) {
-    .cards-row {
-        gap: 15px;
+/* پاپ اپ ماڈل */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: transparent;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 30px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-image-area img {
+    width: 100%;
+    border-radius: 30px 30px 0 0;
+}
+
+.white-box {
+    background: white;
+    border-radius: 0 0 30px 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.ip-counter {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.ip-label {
+    color: #475569;
+}
+
+#fakeIp, #runningNumber {
+    color: #2563eb;
+}
+
+.affiliate-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+    width: 100%;
+    text-align: center;
+}
+
+.affiliate-btn:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* موبائل کے لیے */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
     }
     .card {
-        flex: 0 0 170px;
+        flex: 0 1 150px;
+        min-height: 160px;
+        padding: 15px 8px;
+    }
+    .card img {
+        max-width: 100px;
+    }
+    .site-name {
+        font-size: 1.5rem;
+    }
+    .logo-img {
+        width: 45px;
+        height: 45px;
     }
 }
 
-@media (max-width: 950px) {
-    .card {
-        flex: 0 0 160px;
-    }
-}
-
-@media (max-width: 850px) {
+@media (max-width: 550px) {
     .cards-row {
         gap: 12px;
     }
     .card {
-        flex: 0 0 150px;
-        padding: 20px 8px;
-        min-height: 160px;
+        flex: 0 1 130px;
+        min-height: 140px;
     }
-}
-
-@media (max-width: 700px) {
-    .card {
-        flex: 0 0 140px;
+    .card img {
+        max-width: 80px;
     }
 }
