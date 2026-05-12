@@ -110,7 +110,7 @@ body {
     border-radius: 12px;
 }
 
-/* پاپ اپ ماڈل - سینٹر میں */
+/* پاپ اپ ماڈل */
 .modal {
     display: none;
     position: fixed;
@@ -190,25 +190,29 @@ body {
     margin-bottom: 6px;
 }
 
+/* یہ متن صرف بٹن شو ہونے پر دکھے گا */
+.hidden-text {
+    margin-top: 5px;
+}
+
 .ready-text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     color: white;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    margin-top: 6px;
 }
 
 .sponsor-text {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #ddd;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
 .unlock-text {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #ffd700;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .code-box {
@@ -245,7 +249,6 @@ body {
     background: linear-gradient(135deg, #4ade80, #22c55e);
 }
 
-/* موبائل کے لیے */
 @media (max-width: 768px) {
     .container {
         padding: 20px 15px;
@@ -282,11 +285,14 @@ body {
     .offer-text {
         font-size: 1.2rem;
     }
-    .extra-text, .ready-text {
+    .extra-text {
         font-size: 0.9rem;
     }
+    .ready-text {
+        font-size: 0.85rem;
+    }
     .sponsor-text, .unlock-text {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
     .code-box {
         padding: 4px 14px;
@@ -319,11 +325,14 @@ body {
     .offer-text {
         font-size: 1rem;
     }
-    .extra-text, .ready-text {
+    .extra-text {
         font-size: 0.75rem;
     }
+    .ready-text {
+        font-size: 0.7rem;
+    }
     .sponsor-text, .unlock-text {
-        font-size: 0.55rem;
+        font-size: 0.5rem;
     }
     .code-box {
         padding: 3px 12px;
