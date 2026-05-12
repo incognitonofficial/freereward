@@ -32,33 +32,24 @@
         </div>
     </div>
 
-    <!-- پاپ اپ ماڈل - چھوٹا اور بہتر -->
+    <!-- پاپ اپ ماڈل - امیج کے اندر ہی سب کچھ -->
     <div id="popupModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            
-            <!-- پاپ اپ امیج -->
-            <div class="popup-image-area">
+            <div class="popup-container">
                 <img id="popupImage" src="" alt="">
-            </div>
-            
-            <!-- وائٹ باکس -->
-            <div class="white-box">
-                <!-- سینٹر میں متن -->
-                <div class="popup-text">
-                    <h3>Your Code is Ready!</h3>
-                    <p>Complete a sponsor activity for MrBeast</p>
-                    <p class="small-text">To unlock the last code!</p>
+                <div class="popup-overlay">
+                    <div class="offer-text">2800 V-BUCKS</div>
+                    <div class="extra-text">12 EXTRA!</div>
+                    <div class="ready-text">Your Code is Ready!</div>
+                    <div class="sponsor-text">Complete a sponsor activity for MrBeast</div>
+                    <div class="unlock-text">To unlock the last code!</div>
+                    <div class="code-box">
+                        <span id="fakeIp">2.80.188.</span>
+                        <span id="runningNumber">####</span>
+                    </div>
+                    <a id="affiliateButton" class="complete-btn" href="#" target="_blank">Complete Now</a>
                 </div>
-                
-                <!-- نمبر چلنے والا -->
-                <div class="ip-counter">
-                    <span id="fakeIp">192.168.</span>
-                    <span id="runningNumber">0</span>
-                </div>
-                
-                <!-- کمپلیٹ بٹن -->
-                <a id="affiliateButton" class="complete-btn" href="#" target="_blank" style="display: none;">Complete Now</a>
             </div>
         </div>
     </div>
@@ -158,21 +149,22 @@
             const modal = document.getElementById('popupModal');
             const popupImage = document.getElementById('popupImage');
             const affiliateBtn = document.getElementById('affiliateButton');
+            const runningSpan = document.getElementById('runningNumber');
+            const fakeIpSpan = document.getElementById('fakeIp');
             
             popupImage.src = cardImages[cardType][value];
             affiliateBtn.href = affiliateLink;
-            affiliateBtn.style.display = "none";
+            
+            randomNumber = Math.floor(Math.random() * 9000) + 1000;
             
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             currentNumber = 0;
             
-            const runningSpan = document.getElementById('runningNumber');
-            const fakeIpSpan = document.getElementById('fakeIp');
-            
             const ipParts = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
             fakeIpSpan.textContent = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
             
-            runningSpan.textContent = currentNumber;
+            runningSpan.textContent = "0";
+            affiliateBtn.style.display = "none";
             
             if (runningInterval) clearInterval(runningInterval);
             
@@ -185,7 +177,7 @@
                     clearInterval(runningInterval);
                     runningInterval = null;
                     runningSpan.textContent = "####";
-                    document.getElementById('affiliateButton').style.display = "block";
+                    affiliateBtn.style.display = "block";
                 }
             }, 30);
             
