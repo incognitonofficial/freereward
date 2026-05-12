@@ -110,6 +110,7 @@ body {
     border-radius: 12px;
 }
 
+/* پاپ اپ ماڈل - چھوٹا کیا گیا */
 .modal {
     display: none;
     position: fixed;
@@ -126,53 +127,77 @@ body {
 .modal-content {
     background-color: transparent;
     width: 90%;
-    max-width: 380px;
-    border-radius: 30px;
+    max-width: 350px;
+    border-radius: 25px;
     position: relative;
 }
 
 .close {
     position: absolute;
-    top: -40px;
-    right: 0;
+    top: -35px;
+    right: -5px;
     color: white;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     background: rgba(0,0,0,0.5);
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .popup-image-area img {
     width: 100%;
-    border-radius: 30px 30px 0 0;
+    border-radius: 25px 25px 0 0;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .white-box {
     background: white;
-    border-radius: 0 0 30px 30px;
+    border-radius: 0 0 25px 25px;
     padding: 20px;
     text-align: center;
 }
 
+/* پاپ اپ کے سینٹر میں متن */
+.popup-text h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.popup-text p {
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.popup-text .small-text {
+    font-size: 0.8rem;
+    color: #ef4444;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* نمبر والا باکس */
 .ip-counter {
     background: #f1f5f9;
-    padding: 15px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
+    padding: 12px;
+    border-radius: 40px;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
     gap: 5px;
     flex-wrap: wrap;
     font-family: monospace;
-    letter-spacing: 1px;
 }
 
 #fakeIp, #runningNumber {
@@ -180,17 +205,18 @@ body {
 }
 
 #runningNumber {
-    min-width: 80px;
+    min-width: 70px;
     text-align: center;
 }
 
-.affiliate-btn {
+/* کمپلیٹ بٹن */
+.complete-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #2563eb, #1e40af);
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 14px 25px;
+    padding: 12px 20px;
     border-radius: 50px;
     text-decoration: none;
     cursor: pointer;
@@ -200,11 +226,12 @@ body {
     border: none;
 }
 
-.affiliate-btn:hover {
+.complete-btn:hover {
     transform: scale(1.02);
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #4ade80, #22c55e);
 }
 
+/* موبائل کے لیے */
 @media (max-width: 768px) {
     .container {
         padding: 20px 15px;
@@ -228,12 +255,22 @@ body {
         font-size: 0.85rem;
         padding: 5px 12px;
     }
-    .ip-counter {
+    .modal-content {
+        max-width: 320px;
+    }
+    .popup-text h3 {
         font-size: 1rem;
     }
-    .affiliate-btn {
-        font-size: 1.1rem;
-        padding: 12px 20px;
+    .popup-text p {
+        font-size: 0.75rem;
+    }
+    .ip-counter {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .complete-btn {
+        font-size: 1rem;
+        padding: 10px 15px;
     }
 }
 
@@ -247,5 +284,8 @@ body {
     }
     .card img {
         max-width: 75px;
+    }
+    .modal-content {
+        max-width: 280px;
     }
 }
