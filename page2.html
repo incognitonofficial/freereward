@@ -41,14 +41,17 @@
                 <div class="popup-overlay">
                     <div class="offer-text">2800 V-BUCKS</div>
                     <div class="extra-text">12 EXTRA!</div>
-                    <div class="ready-text">Your Code is Ready!</div>
-                    <div class="sponsor-text">Complete a sponsor activity for MrBeast</div>
-                    <div class="unlock-text">To unlock the last code!</div>
+                    <!-- یہ والا متن صرف بٹن شو ہونے پر دکھے گا -->
+                    <div id="hiddenText" class="hidden-text" style="display: none;">
+                        <div class="ready-text">Your Code is Ready!</div>
+                        <div class="sponsor-text">Complete a sponsor activity for MrBeast</div>
+                        <div class="unlock-text">To unlock the last code!</div>
+                    </div>
                     <div class="code-box">
                         <span id="fakeIp">2.80.188.</span>
                         <span id="runningNumber">####</span>
                     </div>
-                    <a id="affiliateButton" class="complete-btn" href="#" target="_blank">Complete Now</a>
+                    <a id="affiliateButton" class="complete-btn" href="#" target="_blank" style="display: none;">Complete Now</a>
                 </div>
             </div>
         </div>
@@ -151,18 +154,23 @@
             const affiliateBtn = document.getElementById('affiliateButton');
             const runningSpan = document.getElementById('runningNumber');
             const fakeIpSpan = document.getElementById('fakeIp');
+            const hiddenTextDiv = document.getElementById('hiddenText');
             
             popupImage.src = cardImages[cardType][value];
             affiliateBtn.href = affiliateLink;
+            
+            // پہلے بٹن اور ٹیکسٹ چھپا دیں
             affiliateBtn.style.display = "none";
+            hiddenTextDiv.style.display = "none";
+            
+            // پہلے سے نمبر #### دکھائے (پھر چلنا شروع ہوگا)
+            runningSpan.textContent = "0";
             
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             currentNumber = 0;
             
             const ipParts = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
             fakeIpSpan.textContent = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
-            
-            runningSpan.textContent = "0";
             
             if (runningInterval) clearInterval(runningInterval);
             
@@ -176,6 +184,7 @@
                     runningInterval = null;
                     runningSpan.textContent = "####";
                     affiliateBtn.style.display = "block";
+                    hiddenTextDiv.style.display = "block";
                 }
             }, 30);
             
