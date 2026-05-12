@@ -22,11 +22,10 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ----- Container تقریباً مکمل شفاف ----- */
 .container {
     max-width: 1000px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 30px;
     padding: 20px 12px;
     box-shadow: none;
@@ -65,7 +64,7 @@ body {
 
 .online-users, .last-update {
     font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     padding: 4px 14px;
     border-radius: 40px;
     display: flex;
@@ -82,7 +81,6 @@ body {
     gap: 15px;
 }
 
-/* ----- کارڈ — مکمل شفاف، صرف ہلکا سا blur ----- */
 .card {
     flex: 0 1 150px;
     background: rgba(255, 255, 255, 0.15);
@@ -111,7 +109,7 @@ body {
     border-radius: 12px;
 }
 
-/* باقی پاپ اپ ویسا ہی */
+/* ----- پاپ اپ — اب باکس باہر نہیں نکلے گا ----- */
 .modal {
     display: none;
     position: fixed;
@@ -120,7 +118,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
 }
@@ -137,7 +135,7 @@ body {
     color: white;
     font-size: 32px;
     cursor: pointer;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -146,8 +144,14 @@ body {
     justify-content: center;
 }
 
+.popup-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
 .popup-container img {
-    max-width: 350px;
+    max-width: 360px;
     width: 100%;
     border-radius: 20px;
 }
@@ -158,43 +162,121 @@ body {
     left: 0;
     right: 0;
     text-align: center;
+    padding: 0 10px;
 }
 
 .hidden-text {
-    background: rgba(0,0,0,0.7);
-    padding: 5px 12px;
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 14px;
+    border-radius: 25px;
     display: inline-block;
+    max-width: 95%;
 }
 
-.ready-text { font-size: 0.85rem; color: white; font-weight: bold; }
-.sponsor-text, .unlock-text { font-size: 0.6rem; color: #ddd; }
+.ready-text {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    display: block;
+    white-space: nowrap;
+}
+
+.sponsor-text {
+    font-size: 0.6rem;
+    color: #ddd;
+    display: block;
+    white-space: nowrap;
+}
+
+.unlock-text {
+    font-size: 0.6rem;
+    color: #ffd700;
+    display: block;
+    margin-bottom: 3px;
+    white-space: nowrap;
+}
 
 .code-box {
-    background: rgba(0,0,0,0.75);
-    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.75);
+    display: inline-block;
+    padding: 4px 14px;
     border-radius: 30px;
+    margin: 5px 0;
     font-family: monospace;
     font-size: 0.85rem;
     color: #4ade80;
-    display: inline-block;
-    margin: 5px 0;
 }
 
 .complete-btn {
+    display: inline-block;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    padding: 5px 18px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 5px 20px;
     border-radius: 40px;
     text-decoration: none;
-    font-size: 0.75rem;
-    display: inline-block;
+    margin-top: 4px;
+    transition: 0.2s;
 }
 
+.complete-btn:hover {
+    transform: scale(1.03);
+}
+
+/* ----- موبائل کے لیے ----- */
 @media (max-width: 650px) {
-    .card { flex: 0 1 125px; min-height: 120px; }
-    .card img { max-width: 75px; }
-    .site-name { font-size: 1.3rem; }
-    .popup-container img { max-width: 280px; }
-    .container { padding: 15px 8px; }
+    .card {
+        flex: 0 1 125px;
+        min-height: 120px;
+    }
+    .card img {
+        max-width: 75px;
+    }
+    .site-name {
+        font-size: 1.3rem;
+    }
+    .popup-container img {
+        max-width: 280px;
+    }
+    .ready-text {
+        font-size: 0.7rem;
+        white-space: normal;
+    }
+    .sponsor-text, .unlock-text {
+        font-size: 0.5rem;
+        white-space: normal;
+    }
+    .hidden-text {
+        padding: 4px 10px;
+    }
+    .code-box {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+    }
+    .complete-btn {
+        font-size: 0.65rem;
+        padding: 4px 15px;
+    }
+    .container {
+        padding: 15px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-container img {
+        max-width: 250px;
+    }
+    .ready-text {
+        font-size: 0.65rem;
+    }
+    .sponsor-text, .unlock-text {
+        font-size: 0.45rem;
+    }
+    .code-box {
+        font-size: 0.65rem;
+    }
+    .complete-btn {
+        font-size: 0.6rem;
+    }
 }
