@@ -1,167 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reward Page</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>GiftCards - انتخاب</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
-<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen text-center">
-
-<!-- TITLE -->
-<h1 class="text-4xl md:text-5xl font-bold pt-8">
-  🎉 FreeReward Hub
-</h1>
-
-<!-- INFO -->
-<div class="mt-2 text-gray-300">
-  User Online: <span id="users">200</span> |
-  Last update: <span id="date"></span>
-</div>
-
-<!-- GRID (3 cards show here) -->
-<div id="grid"
-class="grid grid-cols-3 justify-center gap-4 max-w-fit mx-auto mt-8 px-4">
-</div>
-
-<!-- POPUP -->
-<div id="overlay"
-class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center px-4">
-
-  <img id="popupImg"
-  class="w-full max-w-[220px] h-[320px] object-cover rounded-2xl shadow-2xl">
-
-  <div class="bg-white text-black mt-4 w-[240px] p-3 rounded-xl font-bold text-2xl">
-    <div id="randomBox">0</div>
-  </div>
-
-  <div id="resultBox"
-  class="hidden text-white mt-4 text-2xl font-bold">
-    Your code is ready ✅
-  </div>
-
-  <a id="ctaBox"
-  href="https://www.google.com/"
-  target="_blank"
-  class="hidden mt-4 bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl font-bold transition">
-    Continue Offer 🚀
-  </a>
-
-</div>
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  // DATE
-  document.getElementById("date").innerText =
-    new Date().toDateString();
-
-  // USERS
-  let base = 200;
-
-  function updateUsers(){
-    document.getElementById("users").innerText =
-      base + Math.floor(Math.random() * 20);
-  }
-
-  updateUsers();
-  setInterval(updateUsers, 4000);
-
-  // URL PARAM
-  const params = new URLSearchParams(window.location.search);
-  const card = params.get("card") || "1";
-
-  // GRID DATA (3 options per card)
-  const dataGrid = {
-    "1": ["images/roblox25.png","images/roblox50.png","images/roblox100.png"],
-    "2": ["images/xboxgiftcard25.png","images/xboxgiftcard50.png","images/xboxgiftcard100.png"],
-    "3": ["images/fortnitecard25.png","images/fortnitecard50.png","images/fortnitecard100.png"],
-    "4": ["images/minecraft25.png","images/minecraft50.png","images/minecraft100.png"],
-    "5": ["images/playstationgiftcard25.png","images/playstationgiftcard25.png","images/playstationgiftcard100.png"],
-    "6": ["images/googlegiftcard25.png","images/googlegiftcard50.png","images/googlegiftcard100.png"]
-  };
-
-  const grid = document.getElementById("grid");
-
-  // render grid
-  if(dataGrid[card]){
-
-    dataGrid[card].forEach(img => {
-
-      grid.innerHTML += `
-        <div onclick="selectCard('${img}')"
-        class="cursor-pointer w-full max-w-[200px] h-[280px] overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-
-          <img src="${img}" class="w-full h-full object-cover">
-
+<body>
+    <div class="container">
+        <div class="main-header">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" class="logo-img">
+            </div>
+            <h1 class="site-name">GiftArena</h1>
         </div>
-      `;
 
-    });
+        <div class="stats-panel">
+            <div class="online-users">
+                <i class="fas fa-users"></i>
+                <span id="userCount">200</span>
+                <span> آن لائن صارفین</span>
+            </div>
+            <div class="last-update">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="updateDate">----</span>
+            </div>
+        </div>
 
-  }
+        <h2 class="selection-title">اپنی قیمت منتخب کریں</h2>
+        
+        <div class="cards-row" id="optionsRow">
+            <!-- یہاں 3 آپشنز JavaScript سے ڈالیں گے -->
+        </div>
+    </div>
 
-  // POPUP SYSTEM
-  const overlay = document.getElementById("overlay");
-  const popupImg = document.getElementById("popupImg");
-  const randomBox = document.getElementById("randomBox");
-  const resultBox = document.getElementById("resultBox");
-  const ctaBox = document.getElementById("ctaBox");
+    <!-- پاپ اپ ماڈل -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="popup-image-area">
+                <img id="popupImage" src="" alt="Selected Gift Card">
+            </div>
+            <div class="white-box">
+                <div class="ip-counter">
+                    <span class="ip-label">آپ کا IP ایڈریس:</span>
+                    <span id="fakeIp">192.168.</span>
+                    <span id="runningNumber">0</span>
+                </div>
+                <a id="affiliateButton" class="affiliate-btn" href="#" target="_blank">✨ کلک کریں ✨</a>
+            </div>
+        </div>
+    </div>
 
-  window.selectCard = function(img){
+    <script>
+        // ==========================================
+        // تصاویر کی لوکیشن (آپ کے مطابق)
+        // ==========================================
+        const cardImages = {
+            fortnite: {
+                main: "fortnitecard.png",
+                25: "fortnitecard25.png",
+                50: "fortnitecard50.png",
+                100: "fortnitecard100.png"
+            },
+            google: {
+                main: "googlegiftcard.png",
+                25: "googlegiftcard25.png",
+                50: "googlegiftcard50.png",
+                100: "googlegiftcard100.png"
+            },
+            minecraft: {
+                main: "minecraftcard.png",
+                25: "minecraft25.png",
+                50: "minecraft50.png",
+                100: "minecraft100.png"
+            },
+            playstation: {
+                main: "playstationgiftcard.png",
+                25: "playstationgiftcard25.png",
+                50: "playstationgiftcard50.png",
+                100: "playstationgiftcard100.png"
+            },
+            roblox: {
+                main: "robloxcard.png",
+                25: "roblox25.png",
+                50: "roblox50.png",
+                100: "roblox100.png"
+            }
+        };
 
-    overlay.classList.remove("hidden");
+        // بٹن کا لنک (آپ اپنا affiliate لنک لگائیں)
+        const affiliateLink = "https://wa.me/9234567890"; // <- اپنا لنک یہاں لگائیں
 
-    popupImg.src = img;
+        let currentUsers = 200;
+        let selectedCardType = null;
+        let selectedValue = null;
+        let runningInterval = null;
+        let currentNumber = 0;
+        let targetNumber = 0;
 
-    resultBox.classList.add("hidden");
-    ctaBox.classList.add("hidden");
+        function updateUserCountSlowly() {
+            let change = Math.floor(Math.random() * 35) + 5;
+            if (Math.random() > 0.5) {
+                currentUsers += change;
+            } else {
+                currentUsers -= change;
+            }
+            if (currentUsers > 800) currentUsers = 800;
+            if (currentUsers < 200) currentUsers = 200;
+            document.getElementById('userCount').textContent = currentUsers;
+        }
 
-    randomBox.innerText = "0";
+        function setTodayDate() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('updateDate').textContent = today.toLocaleDateString('ur-PK', options);
+        }
 
-    let step = 0;
+        // URL سے کارڈ کی قسم حاصل کریں
+        function getCardFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('card') || 'fortnite';
+        }
 
-    function get4Digit(){
-      return Math.floor(1000 + Math.random() * 9000);
-    }
+        // 3 آپشن کارڈز بنائیں
+        function loadOptions(cardType) {
+            const optionsRow = document.getElementById('optionsRow');
+            optionsRow.innerHTML = '';
+            
+            const values = [25, 50, 100];
+            values.forEach(value => {
+                const card = document.createElement('div');
+                card.className = 'card option-card';
+                card.setAttribute('data-value', value);
+                
+                const img = document.createElement('img');
+                img.src = cardImages[cardType][value];
+                img.alt = `${value} Gift Card`;
+                
+                const priceTag = document.createElement('span');
+                priceTag.className = 'price-tag';
+                priceTag.textContent = `$${value}`;
+                
+                card.appendChild(img);
+                card.appendChild(priceTag);
+                
+                card.addEventListener('click', function() {
+                    selectedValue = value;
+                    showPopup(cardType, value);
+                });
+                
+                optionsRow.appendChild(card);
+            });
+        }
 
-    let interval = setInterval(() => {
+        // پاپ اپ دکھائیں اور نمبر رن کریں
+        function showPopup(cardType, value) {
+            const modal = document.getElementById('popupModal');
+            const popupImage = document.getElementById('popupImage');
+            const affiliateBtn = document.getElementById('affiliateButton');
+            
+            // تصویر سیٹ کریں
+            popupImage.src = cardImages[cardType][value];
+            
+            // لنک سیٹ کریں
+            affiliateBtn.href = affiliateLink;
+            
+            // رینڈم IP جیسی تعداد بنائیں (10000 سے 99999 کے درمیان)
+            targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+            currentNumber = 0;
+            
+            const runningSpan = document.getElementById('runningNumber');
+            const fakeIpSpan = document.getElementById('fakeIp');
+            
+            // رینڈم IP بنائیں
+            const ipParts = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
+            fakeIpSpan.textContent = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
+            
+            runningSpan.textContent = currentNumber;
+            
+            if (runningInterval) clearInterval(runningInterval);
+            
+            runningInterval = setInterval(() => {
+                if (currentNumber < targetNumber) {
+                    currentNumber += Math.floor(Math.random() * 500) + 100;
+                    if (currentNumber > targetNumber) currentNumber = targetNumber;
+                    runningSpan.textContent = currentNumber;
+                } else {
+                    clearInterval(runningInterval);
+                    runningInterval = null;
+                }
+            }, 30);
+            
+            modal.style.display = "flex";
+        }
 
-      randomBox.innerText =
-        get4Digit() + " " +
-        get4Digit() + " " +
-        get4Digit() + " " +
-        get4Digit();
-
-      step++;
-
-      if(step >= 25){
-        clearInterval(interval);
-        resultBox.classList.remove("hidden");
-        ctaBox.classList.remove("hidden");
-      }
-
-    }, 120);
-
-  };
-
-  overlay.addEventListener("click", function(e){
-    if(e.target === overlay){
-
-      overlay.classList.add("hidden");
-      resultBox.classList.add("hidden");
-      ctaBox.classList.add("hidden");
-      randomBox.innerText = "0";
-
-    }
-  });
-
-});
-
-</script>
-
+        window.addEventListener('DOMContentLoaded', function() {
+            setTodayDate();
+            currentUsers = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
+            document.getElementById('userCount').textContent = currentUsers;
+            setInterval(updateUserCountSlowly, 3000);
+            
+            selectedCardType = getCardFromURL();
+            loadOptions(selectedCardType);
+        });
+        
+        // پاپ اپ بند کرنے کا فنکشن
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('popupModal').style.display = "none";
+            if (runningInterval) clearInterval(runningInterval);
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('popupModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+                if (runningInterval) clearInterval(runningInterval);
+            }
+        }
+    </script>
 </body>
 </html>
