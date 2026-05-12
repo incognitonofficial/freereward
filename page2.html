@@ -39,9 +39,7 @@
             <div class="popup-container">
                 <img id="popupImage" src="" alt="">
                 <div class="popup-overlay">
-                    <div class="offer-text">2800 V-BUCKS</div>
-                    <div class="extra-text">12 EXTRA!</div>
-                    <!-- یہ والا متن صرف بٹن شو ہونے پر دکھے گا -->
+                    <!-- 2800 V-BUCKS اور 12 EXTRA! ہٹا دیے گئے -->
                     <div id="hiddenText" class="hidden-text" style="display: none;">
                         <div class="ready-text">Your Code is Ready!</div>
                         <div class="sponsor-text">Complete a sponsor activity for MrBeast</div>
@@ -159,11 +157,9 @@
             popupImage.src = cardImages[cardType][value];
             affiliateBtn.href = affiliateLink;
             
-            // پہلے بٹن اور ٹیکسٹ چھپا دیں
             affiliateBtn.style.display = "none";
             hiddenTextDiv.style.display = "none";
             
-            // پہلے سے نمبر #### دکھائے (پھر چلنا شروع ہوگا)
             runningSpan.textContent = "0";
             
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
