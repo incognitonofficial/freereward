@@ -6,14 +6,21 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
+    background: linear-gradient(145deg, #4D6AFF, #3B82F6, #1E40AF, #4D6AFF);
+    background-size: 400% 400%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    animation: gradientMove 8s ease infinite;
 }
 
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 .container {
     max-width: 1200px;
     width: 100%;
