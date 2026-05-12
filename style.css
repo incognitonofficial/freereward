@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -16,37 +17,42 @@ body {
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-/* ----- یہ وہ سفید باکس ہے جو آپ چھوٹا کرنا چاہتے ہیں ----- */
 .container {
-    max-width: 900px;        /* چوڑائی کم کر دی (پہلے 1200px تھی) */
+    max-width: 1200px;
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 30px;
-    padding: 20px 10px;      /* بائیں/دائیں پیڈنگ کم (پہلے 20px تھی) */
-    box-shadow: none;        /* کوئی سایہ نہیں */
-    border: none;            /* کوئی بورڈر نہیں */
+    border-radius: 40px;
+    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+    padding: 30px 20px 40px 20px;
 }
 
 .main-header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
 }
 
 .site-name {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
     background: linear-gradient(135deg, #1e293b, #2d3a4f);
     -webkit-background-clip: text;
@@ -57,58 +63,68 @@ body {
 .stats-panel {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background: #f1f5f9;
-    padding: 6px 12px;
-    border-radius: 50px;
-    margin-bottom: 25px;
+    padding: 12px 22px;
+    border-radius: 60px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .online-users, .last-update {
-    font-size: 0.85rem;
-    background: white;
-    padding: 4px 12px;
-    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    background: white;
+    padding: 6px 18px;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.online-users i, .last-update i {
+    color: #2563eb;
+    font-size: 1.1rem;
 }
 
 .cards-row {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px;
-    margin: 0;
+    gap: 25px;
+    margin: 20px 0;
 }
 
-/* ----- کارڈز کے اندر کا حصہ (بغیر کسی بورڈر/شڈو کے) ----- */
 .card {
-    flex: 0 1 150px;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 16px;
-    padding: 8px 5px;
+    flex: 0 1 170px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 18px 10px;
+    min-height: 170px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: none !important;
-    border: none !important;
-    transition: transform 0.2s;
+    box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    background: white;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
 }
 
 .card img {
     width: 100%;
-    max-width: 100px;
+    max-width: 120px;
     border-radius: 12px;
 }
 
-/* پاپ اپ (ویسی ہی رکھی) */
+/* پاپ اپ ماڈل */
 .modal {
     display: none;
     position: fixed;
@@ -117,82 +133,238 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0.85);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
+    background-color: transparent;
     position: relative;
-    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .close {
     position: absolute;
-    top: -30px;
-    right: -10px;
+    top: -35px;
+    right: -35px;
     color: white;
-    font-size: 30px;
+    font-size: 35px;
+    font-weight: bold;
     cursor: pointer;
     background: rgba(0,0,0,0.6);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 20;
+}
+
+.popup-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .popup-container img {
-    max-width: 350px;
+    display: block;
+    max-width: 450px;
     width: 100%;
     border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .popup-overlay {
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     left: 0;
     right: 0;
     text-align: center;
+    padding: 10px 20px;
 }
 
+.offer-text {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+.extra-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-bottom: 6px;
+}
+
+/* یہ متن صرف بٹن شو ہونے پر دکھے گا */
 .hidden-text {
-    background: rgba(0,0,0,0.7);
-    padding: 5px 10px;
-    border-radius: 20px;
+       margin-top: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 15px;
+    border-radius: 25px;
     display: inline-block;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ready-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.sponsor-text {
+    font-size: 0.7rem;
+    color: #ddd;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.unlock-text {
+    font-size: 0.7rem;
+    color: #ffd700;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     margin-bottom: 5px;
 }
 
-.ready-text { font-size: 0.85rem; color: white; font-weight: bold; }
-.sponsor-text, .unlock-text { font-size: 0.6rem; color: #ddd; }
-
 .code-box {
     background: rgba(0,0,0,0.75);
-    padding: 4px 10px;
-    border-radius: 30px;
-    font-family: monospace;
-    font-size: 0.85rem;
-    color: #4ade80;
     display: inline-block;
-    margin: 5px 0;
+    padding: 6px 18px;
+    border-radius: 30px;
+    margin: 6px 0;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4ade80;
+    letter-spacing: 1px;
 }
 
 .complete-btn {
+    display: inline-block;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    padding: 5px 18px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 8px 30px;
     border-radius: 50px;
     text-decoration: none;
-    font-size: 0.75rem;
-    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+    border: none;
+    margin-top: 6px;
 }
 
-@media (max-width: 650px) {
-    .container { max-width: 100%; padding: 15px 8px; }
-    .card { flex: 0 1 120px; }
-    .card img { max-width: 75px; }
-    .site-name { font-size: 1.3rem; }
-    .popup-container img { max-width: 280px; }
+.complete-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+    }
+    .card {
+        flex: 0 1 140px;
+        min-height: 150px;
+        padding: 12px 6px;
+    }
+    .card img {
+        max-width: 90px;
+    }
+    .site-name {
+        font-size: 1.3rem;
+    }
+    .logo-img {
+        width: 35px;
+        height: 35px;
+    }
+    .online-users, .last-update {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+    }
+    .popup-container img {
+        max-width: 340px;
+    }
+    .close {
+        top: -30px;
+        right: -20px;
+        font-size: 30px;
+        width: 35px;
+        height: 35px;
+    }
+    .offer-text {
+        font-size: 1.2rem;
+    }
+    .extra-text {
+        font-size: 0.9rem;
+    }
+    .ready-text {
+        font-size: 0.85rem;
+    }
+    .sponsor-text, .unlock-text {
+        font-size: 0.6rem;
+    }
+    .code-box {
+        padding: 4px 14px;
+        font-size: 0.85rem;
+    }
+    .complete-btn {
+        font-size: 0.8rem;
+        padding: 6px 25px;
+    }
+    .popup-overlay {
+        bottom: 12px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .cards-row {
+        gap: 12px;
+    }
+    .card {
+        flex: 0 1 120px;
+        min-height: 130px;
+    }
+    .card img {
+        max-width: 75px;
+    }
+    .popup-container img {
+        max-width: 300px;
+    }
+    .offer-text {
+        font-size: 1rem;
+    }
+    .extra-text {
+        font-size: 0.75rem;
+    }
+    .ready-text {
+        font-size: 0.7rem;
+    }
+    .sponsor-text, .unlock-text {
+        font-size: 0.5rem;
+    }
+    .code-box {
+        padding: 3px 12px;
+        font-size: 0.75rem;
+    }
+    .complete-btn {
+        font-size: 0.7rem;
+        padding: 5px 20px;
+    }
+    .popup-overlay {
+        bottom: 8px;
+        padding: 5px 10px;
+    }
 }
