@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <!-- پاپ اپ ماڈل - امیج کے اندر ہی سب کچھ -->
+    <!-- پاپ اپ ماڈل -->
     <div id="popupModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -154,8 +154,7 @@
             
             popupImage.src = cardImages[cardType][value];
             affiliateBtn.href = affiliateLink;
-            
-            randomNumber = Math.floor(Math.random() * 9000) + 1000;
+            affiliateBtn.style.display = "none";
             
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             currentNumber = 0;
@@ -164,7 +163,6 @@
             fakeIpSpan.textContent = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
             
             runningSpan.textContent = "0";
-            affiliateBtn.style.display = "none";
             
             if (runningInterval) clearInterval(runningInterval);
             
