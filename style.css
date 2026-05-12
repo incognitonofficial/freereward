@@ -23,21 +23,20 @@ body {
     padding: 30px 20px 40px 20px;
 }
 
-/* ہیڈر (لوگو + سائٹ کا نام) */
+/* ہیڈر - سینٹر میں */
 .main-header {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
-    flex-wrap: wrap;
 }
 
 .logo {
     background: linear-gradient(135deg, #2563eb, #1e40af);
-    width: 60px;
-    height: 60px;
-    border-radius: 20px;
+    width: 65px;
+    height: 65px;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +44,7 @@ body {
 }
 
 .logo i {
-    font-size: 32px;
+    font-size: 34px;
     color: white;
 }
 
@@ -59,7 +58,7 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* پینل: صارفین کی تعداد اور تاریخ */
+/* پینل */
 .stats-panel {
     display: flex;
     justify-content: space-between;
@@ -89,24 +88,29 @@ body {
     font-size: 1.3rem;
 }
 
-/* 5 کارڈز والی قطار - سینٹر اور موبائل فرینڈلی */
+/* کارڈز والی قطار - اب 5 کارڈز ایک ہی قطار میں آئیں گے */
 .cards-row {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    margin: 20px 0;
+    flex-wrap: nowrap;      /* 5وں کو ایک ہی لائن میں رکھے گا */
+    gap: 20px;
+    overflow-x: auto;       /* اگر سکرین بہت چھوٹی ہو تو سکرول ہو جائے */
+    padding: 10px 5px;
 }
 
 .card {
-    flex: 0 1 180px;  /* ہر کارڈ کم از کم 180px چوڑا */
-    background: white;
+    flex: 0 0 180px;        /* ہر کارڈ کی چوڑائی 180px - یقینی بنائی گئی */
+    background: #ffffff;
     border-radius: 24px;
     padding: 25px 12px;
-    min-height: 160px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .card:hover {
@@ -114,44 +118,55 @@ body {
     box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
 }
 
-/* جب آپ کارڈ کے اندر تصویر لگائیں گے تو خودکار طور پر سینٹر اور ریسپانسیو ہوگی */
+/* جب کارڈز خالی ہوں تو کم از کم ایک placeholder دکھے (اختیاری) */
+.card:empty::before {
+    content: "✨";
+    font-size: 40px;
+    opacity: 0.4;
+}
+
+/* آپ کی اپنی تصاویر اور متن کے لیے */
 .card img {
     width: 100%;
     max-width: 120px;
-    display: block;
-    margin: 0 auto 15px auto;
+    margin-bottom: 15px;
+    border-radius: 12px;
 }
 
 .card p, .card h3, .card span {
-    /* آپ جو بھی متن ڈالیں گے، وہ خود بہ خود ٹھیک دکھے گا */
     text-align: center;
+    color: #1e293b;
 }
 
-/* موبائل کے لیے (چھوٹی سکرین) */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px 15px 30px 15px;
-    }
-    .site-name {
-        font-size: 1.6rem;
-    }
-    .stats-panel {
-        padding: 12px 18px;
-    }
-    .online-users, .last-update {
-        font-size: 1rem;
-        padding: 6px 15px;
+/* موبائل اور چھوٹی سکرینوں کے لیے: اگر 5 کارڈز ایک ساتھ نہ آ سکیں تو سکرول ہو جائے گا (ٹوٹے گا نہیں) */
+@media (max-width: 1050px) {
+    .cards-row {
+        gap: 15px;
     }
     .card {
-        flex: 0 1 150px;
+        flex: 0 0 170px;
+    }
+}
+
+@media (max-width: 950px) {
+    .card {
+        flex: 0 0 160px;
+    }
+}
+
+@media (max-width: 850px) {
+    .cards-row {
+        gap: 12px;
+    }
+    .card {
+        flex: 0 0 150px;
         padding: 20px 8px;
-        min-height: 140px;
+        min-height: 160px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 700px) {
     .card {
-        flex: 0 1 130px;
-        padding: 15px 5px;
+        flex: 0 0 140px;
     }
 }
