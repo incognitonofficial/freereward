@@ -27,18 +27,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
     margin-bottom: 30px;
 }
 
 .logo-img {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     object-fit: contain;
 }
 
 .site-name {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     background: linear-gradient(135deg, #1e293b, #2d3a4f);
     -webkit-background-clip: text;
@@ -51,7 +51,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background: #f1f5f9;
-    padding: 15px 25px;
+    padding: 12px 22px;
     border-radius: 60px;
     margin-bottom: 40px;
     flex-wrap: wrap;
@@ -59,20 +59,20 @@ body {
 }
 
 .online-users, .last-update {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
     background: white;
-    padding: 8px 20px;
+    padding: 6px 18px;
     border-radius: 40px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .online-users i, .last-update i {
     color: #2563eb;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .cards-row {
@@ -84,11 +84,11 @@ body {
 }
 
 .card {
-    flex: 0 1 180px;
+    flex: 0 1 170px;
     background: #ffffff;
     border-radius: 24px;
-    padding: 20px 12px;
-    min-height: 180px;
+    padding: 18px 10px;
+    min-height: 170px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,7 +106,7 @@ body {
 
 .card img {
     width: 100%;
-    max-width: 130px;
+    max-width: 120px;
     border-radius: 12px;
 }
 
@@ -126,7 +126,7 @@ body {
 .modal-content {
     background-color: transparent;
     width: 90%;
-    max-width: 400px;
+    max-width: 380px;
     border-radius: 30px;
     position: relative;
 }
@@ -165,16 +165,23 @@ body {
     padding: 15px;
     border-radius: 50px;
     margin-bottom: 20px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
     gap: 5px;
     flex-wrap: wrap;
+    font-family: monospace;
+    letter-spacing: 1px;
 }
 
 #fakeIp, #runningNumber {
     color: #2563eb;
+}
+
+#runningNumber {
+    min-width: 80px;
+    text-align: center;
 }
 
 .affiliate-btn {
@@ -183,13 +190,14 @@ body {
     color: white;
     font-size: 1.3rem;
     font-weight: bold;
-    padding: 15px 30px;
+    padding: 14px 25px;
     border-radius: 50px;
     text-decoration: none;
     cursor: pointer;
     transition: transform 0.2s;
     width: 100%;
     text-align: center;
+    border: none;
 }
 
 .affiliate-btn:hover {
@@ -202,19 +210,30 @@ body {
         padding: 20px 15px;
     }
     .card {
-        flex: 0 1 150px;
-        min-height: 160px;
-        padding: 15px 8px;
+        flex: 0 1 140px;
+        min-height: 150px;
+        padding: 12px 6px;
     }
     .card img {
-        max-width: 100px;
+        max-width: 90px;
     }
     .site-name {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .logo-img {
-        width: 45px;
-        height: 45px;
+        width: 35px;
+        height: 35px;
+    }
+    .online-users, .last-update {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+    }
+    .ip-counter {
+        font-size: 1rem;
+    }
+    .affiliate-btn {
+        font-size: 1.1rem;
+        padding: 12px 20px;
     }
 }
 
@@ -223,10 +242,10 @@ body {
         gap: 12px;
     }
     .card {
-        flex: 0 1 130px;
-        min-height: 140px;
+        flex: 0 1 120px;
+        min-height: 130px;
     }
     .card img {
-        max-width: 80px;
+        max-width: 75px;
     }
 }
