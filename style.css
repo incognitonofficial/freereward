@@ -1,29 +1,157 @@
-<style>
-body{
-  margin:0;
-  font-family: 'Black Han Sans', sans-serif;
-  background: linear-gradient(-45deg, #0b1020, #0d1b2a, #0a0f1c, #111827);
-  background-size: 400% 400%;
-  animation: gradientMove 20s ease infinite;
-  color:white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-@keyframes gradientMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.card{
-  transition: all 0.3s ease;
-  position: relative;
+.container {
+    max-width: 1200px;
+    width: 100%;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+    padding: 30px 20px 40px 20px;
 }
 
-.card:hover{
-  transform: scale(1.05) translateY(-8px);
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+/* ہیڈر (لوگو + سائٹ کا نام) */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
+.logo {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 15px rgba(37,99,235,0.2);
+}
 
-</style>
+.logo i {
+    font-size: 32px;
+    color: white;
+}
+
+.site-name {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1e293b, #2d3a4f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+/* پینل: صارفین کی تعداد اور تاریخ */
+.stats-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 15px 25px;
+    border-radius: 60px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.online-users, .last-update {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.online-users i, .last-update i {
+    color: #2563eb;
+    font-size: 1.3rem;
+}
+
+/* 5 کارڈز والی قطار - سینٹر اور موبائل فرینڈلی */
+.cards-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.card {
+    flex: 0 1 180px;  /* ہر کارڈ کم از کم 180px چوڑا */
+    background: white;
+    border-radius: 24px;
+    padding: 25px 12px;
+    min-height: 160px;
+    box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+}
+
+/* جب آپ کارڈ کے اندر تصویر لگائیں گے تو خودکار طور پر سینٹر اور ریسپانسیو ہوگی */
+.card img {
+    width: 100%;
+    max-width: 120px;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+.card p, .card h3, .card span {
+    /* آپ جو بھی متن ڈالیں گے، وہ خود بہ خود ٹھیک دکھے گا */
+    text-align: center;
+}
+
+/* موبائل کے لیے (چھوٹی سکرین) */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px 30px 15px;
+    }
+    .site-name {
+        font-size: 1.6rem;
+    }
+    .stats-panel {
+        padding: 12px 18px;
+    }
+    .online-users, .last-update {
+        font-size: 1rem;
+        padding: 6px 15px;
+    }
+    .card {
+        flex: 0 1 150px;
+        padding: 20px 8px;
+        min-height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 0 1 130px;
+        padding: 15px 5px;
+    }
+}
