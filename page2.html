@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GiftCards - انتخاب</title>
+    <title>GiftCards - Select</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -11,7 +11,7 @@
     <div class="container">
         <div class="main-header">
             <div class="logo">
-                <img src="logo.png" alt="Logo" class="logo-img">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
             </div>
             <h1 class="site-name">GiftArena</h1>
         </div>
@@ -20,7 +20,7 @@
             <div class="online-users">
                 <i class="fas fa-users"></i>
                 <span id="userCount">200</span>
-                <span> آن لائن صارفین</span>
+                <span> Online Users</span>
             </div>
             <div class="last-update">
                 <i class="fas fa-calendar-alt"></i>
@@ -28,70 +28,61 @@
             </div>
         </div>
 
-        <h2 class="selection-title">اپنی قیمت منتخب کریں</h2>
-        
         <div class="cards-row" id="optionsRow">
-            <!-- یہاں 3 آپشنز JavaScript سے ڈالیں گے -->
         </div>
     </div>
 
-    <!-- پاپ اپ ماڈل -->
     <div id="popupModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="popup-image-area">
-                <img id="popupImage" src="" alt="Selected Gift Card">
+                <img id="popupImage" src="" alt="">
             </div>
             <div class="white-box">
                 <div class="ip-counter">
-                    <span class="ip-label">آپ کا IP ایڈریس:</span>
                     <span id="fakeIp">192.168.</span>
                     <span id="runningNumber">0</span>
                 </div>
-                <a id="affiliateButton" class="affiliate-btn" href="#" target="_blank">✨ کلک کریں ✨</a>
+                <a id="affiliateButton" class="affiliate-btn" href="#" target="_blank">CLAIM NOW</a>
             </div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // تصاویر کی لوکیشن (آپ کے مطابق)
-        // ==========================================
         const cardImages = {
             fortnite: {
-                main: "fortnitecard.png",
-                25: "fortnitecard25.png",
-                50: "fortnitecard50.png",
-                100: "fortnitecard100.png"
+                main: "images/fortnitecard.png",
+                25: "images/fortnitecard25.png",
+                50: "images/fortnitecard50.png",
+                100: "images/fortnitecard100.png"
             },
             google: {
-                main: "googlegiftcard.png",
-                25: "googlegiftcard25.png",
-                50: "googlegiftcard50.png",
-                100: "googlegiftcard100.png"
+                main: "images/googlegiftcard.png",
+                25: "images/googlegiftcard25.png",
+                50: "images/googlegiftcard50.png",
+                100: "images/googlegiftcard100.png"
             },
             minecraft: {
-                main: "minecraftcard.png",
-                25: "minecraft25.png",
-                50: "minecraft50.png",
-                100: "minecraft100.png"
+                main: "images/minecraftcard.png",
+                25: "images/minecraft25.png",
+                50: "images/minecraft50.png",
+                100: "images/minecraft100.png"
             },
             playstation: {
-                main: "playstationgiftcard.png",
-                25: "playstationgiftcard25.png",
-                50: "playstationgiftcard50.png",
-                100: "playstationgiftcard100.png"
+                main: "images/playstationgiftcard.png",
+                25: "images/playstationgiftcard25.png",
+                50: "images/playstationgiftcard50.png",
+                100: "images/playstationgiftcard100.png"
             },
             roblox: {
-                main: "robloxcard.png",
-                25: "roblox25.png",
-                50: "roblox50.png",
-                100: "roblox100.png"
+                main: "images/robloxcard.png",
+                25: "images/roblox25.png",
+                50: "images/roblox50.png",
+                100: "images/roblox100.png"
             }
         };
 
-        // بٹن کا لنک (آپ اپنا affiliate لنک لگائیں)
-        const affiliateLink = "https://wa.me/9234567890"; // <- اپنا لنک یہاں لگائیں
+        const affiliateLink = "https://wa.me/9234567890";
 
         let currentUsers = 200;
         let selectedCardType = null;
@@ -115,16 +106,14 @@
         function setTodayDate() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('updateDate').textContent = today.toLocaleDateString('ur-PK', options);
+            document.getElementById('updateDate').textContent = today.toLocaleDateString('en-US', options);
         }
 
-        // URL سے کارڈ کی قسم حاصل کریں
         function getCardFromURL() {
             const params = new URLSearchParams(window.location.search);
             return params.get('card') || 'fortnite';
         }
 
-        // 3 آپشن کارڈز بنائیں
         function loadOptions(cardType) {
             const optionsRow = document.getElementById('optionsRow');
             optionsRow.innerHTML = '';
@@ -137,14 +126,9 @@
                 
                 const img = document.createElement('img');
                 img.src = cardImages[cardType][value];
-                img.alt = `${value} Gift Card`;
-                
-                const priceTag = document.createElement('span');
-                priceTag.className = 'price-tag';
-                priceTag.textContent = `$${value}`;
+                img.alt = '';
                 
                 card.appendChild(img);
-                card.appendChild(priceTag);
                 
                 card.addEventListener('click', function() {
                     selectedValue = value;
@@ -155,26 +139,20 @@
             });
         }
 
-        // پاپ اپ دکھائیں اور نمبر رن کریں
         function showPopup(cardType, value) {
             const modal = document.getElementById('popupModal');
             const popupImage = document.getElementById('popupImage');
             const affiliateBtn = document.getElementById('affiliateButton');
             
-            // تصویر سیٹ کریں
             popupImage.src = cardImages[cardType][value];
-            
-            // لنک سیٹ کریں
             affiliateBtn.href = affiliateLink;
             
-            // رینڈم IP جیسی تعداد بنائیں (10000 سے 99999 کے درمیان)
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             currentNumber = 0;
             
             const runningSpan = document.getElementById('runningNumber');
             const fakeIpSpan = document.getElementById('fakeIp');
             
-            // رینڈم IP بنائیں
             const ipParts = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
             fakeIpSpan.textContent = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
             
@@ -206,7 +184,6 @@
             loadOptions(selectedCardType);
         });
         
-        // پاپ اپ بند کرنے کا فنکشن
         document.querySelector('.close').onclick = function() {
             document.getElementById('popupModal').style.display = "none";
             if (runningInterval) clearInterval(runningInterval);
