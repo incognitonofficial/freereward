@@ -2,82 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>FreeReward Hub | Claim Your Gift</title>
-<!-- Tailwind CSS CDN -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reward Page</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
-<!-- external custom CSS -->
-<link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen text-center">
 
-<h1 class="text-4xl md:text-5xl font-bold pt-8 tracking-tight">
-  🎉 FreeReward Hub
-</h1>
+<body class="bg-gray-900 text-white text-center">
 
-<div class="mt-2 text-gray-300 text-sm md:text-base">
-  👥 User Online: <span id="users">200</span> &nbsp;|&nbsp;
-  📅 Last update: <span id="date"></span>
+<!-- TITLE -->
+<h1 class="text-4xl font-bold mt-6">🎉 FreeReward Hub</h1>
+
+<!-- INFO -->
+<div class="mt-2 text-gray-300">
+User Online: <span id="users">200</span> |
+Last update: <span id="date"></span>
 </div>
 
-<div id="grid" class="grid grid-cols-3 justify-center gap-5 max-w-fit mx-auto mt-10 px-4">
+<!-- MAIN CARD (same style as index) -->
+<div id="selected"
+class="card w-full max-w-[220px] h-[320px] mx-auto mt-8 overflow-hidden rounded-2xl border border-white/10 transition-all duration-300 hover:scale-105 hover:z-20">
 </div>
 
-<!-- POPUP – FIXED: no shadow, correct image size, aligned white box -->
-<div id="overlay" class="hidden fixed inset-0 bg-black/95 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 overflow-y-auto">
-  <div class="modal-content flex flex-col items-center w-full max-w-sm bg-transparent rounded-2xl my-auto">
-    
-    <!-- Image: fixed width 200px, no shadow, clean rounded -->
-    <img id="popupImg" class="w-[200px] h-auto object-contain rounded-xl border-0"
-         alt="gift card preview">
+<!-- MODAL -->
+<div id="overlay"
+class="hidden fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-center">
 
-    <!-- White text box: directly below, minimal gap, same width as image -->
-    <div class="bg-white text-black mt-4 w-[200px] p-3 rounded-xl font-bold shadow-md">
-      <div id="randomBox" class="random-numbers text-base sm:text-lg text-center tracking-wide">0</div>
-    </div>
+  <img id="popupImg"
+  class="w-full max-w-[220px] h-[320px] object-contain bg-black/20 rounded-2xl">
 
-    <div id="resultBox" class="hidden text-white mt-4 text-lg font-semibold bg-green-600/30 backdrop-blur px-4 py-1 rounded-full">
-      ✅ Your code is ready!
-    </div>
-
-    <a id="ctaBox" href="https://www.google.com/" target="_blank" rel="noopener noreferrer"
-       class="hidden mt-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-6 py-2 rounded-xl font-bold text-white shadow transition-all text-center w-[200px]">
-      🚀 Continue Offer
-    </a>
+  <div class="bg-white text-black mt-4 w-[220px] p-3 rounded-xl font-bold text-2xl">
+    <div id="randomBox">0</div>
   </div>
+
+  <div id="resultBox" class="hidden text-white mt-3 text-xl font-bold">
+    Your code is ready ✅
+  </div>
+
+  <a id="ctaBox" href="https://www.google.com/"
+  target="_blank"
+  class="hidden mt-4 bg-green-500 px-6 py-3 rounded-xl font-bold">
+    Continue Offer 🚀
+  </a>
+
 </div>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
+  // DATE
   document.getElementById("date").innerText = new Date().toDateString();
 
+  // USERS
   let base = 200;
-  function updateUsers() {
-    document.getElementById("users").innerText = base + Math.floor(Math.random() * 28);
-  }
-  updateUsers();
-  setInterval(updateUsers, 4200);
 
+  function updateUsers(){
+    document.getElementById("users").innerText =
+      base + Math.floor(Math.random() * 20);
+  }
+
+  updateUsers();
+  setInterval(updateUsers, 4000);
+
+  // CARD SYSTEM
   const params = new URLSearchParams(window.location.search);
   const card = params.get("card") || "1";
 
-  const dataGrid = {
-    "1": ["images/roblox25.png","images/roblox50.png","images/roblox100.png"],
-    "2": ["images/xboxgiftcard25.png","images/xboxgiftcard50.png","images/xboxgiftcard100.png"],
-    "3": ["images/fortnitecard25.png","images/fortnitecard50.png","images/fortnitecard100.png"],
-    "4": ["images/minecraft25.png","images/minecraft50.png","images/minecraft100.png"],
-    "5": ["images/playstationgiftcard25.png","images/playstationgiftcard25.png","images/playstationgiftcard100.png"],
-    "6": ["images/googlegiftcard25.png","images/googlegiftcard50.png","images/googlegiftcard100.png"]
+  const data = {
+    "1": "robloxcard.png",
+    "2": "xboxgiftcard.png",
+    "3": "fortnitecard.png",
+    "4": "minecraftcard.png",
+    "5": "playstationgiftcard.png",
+    "6": "googlegiftcard.png"
   };
 
-  const gridContainer = document.getElementById("grid");
-  (dataGrid[card] || dataGrid["1"]).forEach(imgSrc => {
-    const cardDiv = document.createElement("div");
-    cardDiv.className = "cursor-pointer w-[160px] md:w-[180px] h-[240px] md:h-[260px] overflow-hidden rounded-2xl border border-white/20 transition hover:scale-105 hover:shadow-xl";
-    cardDiv.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover">`;
-    cardDiv.onclick = () => selectCard(imgSrc);
-    gridContainer.appendChild(cardDiv);
-  });
+  const box = document.getElementById("selected");
+
+  box.innerHTML = `
+    <img src="${data[card] || 'robloxcard.png'}"
+    class="w-full h-full object-contain bg-black/20">
+  `;
 
   const overlay = document.getElementById("overlay");
   const popupImg = document.getElementById("popupImg");
@@ -85,37 +91,53 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultBox = document.getElementById("resultBox");
   const ctaBox = document.getElementById("ctaBox");
 
-  window.selectCard = function(imgPath) {
+  box.addEventListener("click", function () {
+
     overlay.classList.remove("hidden");
-    popupImg.src = imgPath;
+    popupImg.src = data[card] || "robloxcard.png";
+
     resultBox.classList.add("hidden");
     ctaBox.classList.add("hidden");
-    randomBox.innerText = "⚡ generating ⚡";
-    
-    function get4Digit() { return Math.floor(1000 + Math.random() * 9000); }
+    randomBox.innerText = "0";
+
+    function get4Digit(){
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
     let step = 0;
+    let maxSteps = 25;
+
     let interval = setInterval(() => {
-      randomBox.innerText = `${get4Digit()} ${get4Digit()} ${get4Digit()} ${get4Digit()}`;
+
+      randomBox.innerText =
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit() + " " +
+        get4Digit();
+
       step++;
-      if (step >= 22) {
+
+      if(step >= maxSteps){
         clearInterval(interval);
-        randomBox.innerText = `${get4Digit()} ${get4Digit()} ${get4Digit()} ${get4Digit()}`;
         resultBox.classList.remove("hidden");
         ctaBox.classList.remove("hidden");
       }
-    }, 130);
-  };
 
-  overlay.addEventListener("click", function(e) {
-    if (e.target === overlay) {
+    }, 200);
+
+  });
+
+  overlay.addEventListener("click", function (e) {
+    if(e.target === overlay){
       overlay.classList.add("hidden");
       resultBox.classList.add("hidden");
       ctaBox.classList.add("hidden");
       randomBox.innerText = "0";
     }
   });
-  document.querySelector("#overlay .modal-content")?.addEventListener("click", e => e.stopPropagation());
+
 });
 </script>
+
 </body>
 </html>
