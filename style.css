@@ -17,24 +17,21 @@ body {
 }
 
 @keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
+/* ----- Container شفاف ----- */
 .container {
     max-width: 1200px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 40px;
-    box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
-    padding: 30px 20px 40px 20px;
+    padding: 25px 15px 30px 15px;
+    box-shadow: none;
+    border: none;
+    backdrop-filter: blur(2px);
 }
 
 .main-header {
@@ -42,7 +39,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .logo-img {
@@ -54,22 +51,25 @@ body {
 .site-name {
     font-size: 1.8rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #1e293b, #2d3a4f);
+    background: linear-gradient(135deg, #ffffff, #e0e7ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* ----- Stats Panel شفاف ----- */
 .stats-panel {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f1f5f9;
-    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    padding: 10px 20px;
     border-radius: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 12px;
 }
 
 .online-users, .last-update {
@@ -78,10 +78,10 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: white;
-    padding: 6px 18px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px 16px;
     border-radius: 40px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .online-users i, .last-update i {
@@ -93,38 +93,40 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 20px;
     margin: 20px 0;
 }
 
+/* ----- کارڈز شفاف — پس منظر کی حرکت صاف دکھے گی ----- */
 .card {
     flex: 0 1 170px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 24px;
-    padding: 18px 10px;
-    min-height: 170px;
+    padding: 15px 8px;
+    min-height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1);
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: none;
+    border: none;
+    transition: transform 0.2s ease;
     cursor: pointer;
+    backdrop-filter: blur(8px);
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.35);
 }
 
 .card img {
     width: 100%;
-    max-width: 120px;
+    max-width: 110px;
     border-radius: 12px;
 }
 
-/* پاپ اپ ماڈل */
+/* ----- پاپ اپ (ویسی ہی رکھی) ----- */
 .modal {
     display: none;
     position: fixed;
@@ -173,7 +175,7 @@ body {
 
 .popup-container img {
     display: block;
-    max-width: 450px;
+    max-width: 400px;
     width: 100%;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -181,109 +183,79 @@ body {
 
 .popup-overlay {
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
     left: 0;
     right: 0;
     text-align: center;
-    padding: 10px 20px;
-}
-
-.offer-text {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    letter-spacing: 1px;
-}
-
-.extra-text {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ffd700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    margin-bottom: 6px;
-}
-
-/* یہ متن صرف بٹن شو ہونے پر دکھے گا */
-.hidden-text {
-       margin-top: 5px;
-    background: rgba(0, 0, 0, 0.7);
     padding: 8px 15px;
+}
+
+.hidden-text {
+    margin-top: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
     border-radius: 25px;
     display: inline-block;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .ready-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-.sponsor-text {
-    font-size: 0.7rem;
+.sponsor-text, .unlock-text {
+    font-size: 0.65rem;
     color: #ddd;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-}
-
-.unlock-text {
-    font-size: 0.7rem;
-    color: #ffd700;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    margin-bottom: 5px;
 }
 
 .code-box {
     background: rgba(0,0,0,0.75);
     display: inline-block;
-    padding: 6px 18px;
+    padding: 5px 14px;
     border-radius: 30px;
     margin: 6px 0;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: #4ade80;
-    letter-spacing: 1px;
 }
 
 .complete-btn {
     display: inline-block;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: bold;
-    padding: 8px 30px;
+    padding: 6px 25px;
     border-radius: 50px;
     text-decoration: none;
     cursor: pointer;
     transition: transform 0.2s;
     text-align: center;
     border: none;
-    margin-top: 6px;
+    margin-top: 5px;
 }
 
 .complete-btn:hover {
     transform: scale(1.05);
-    background: linear-gradient(135deg, #4ade80, #22c55e);
 }
 
+/* ----- موبائل کے لیے ----- */
 @media (max-width: 768px) {
     .container {
-        padding: 20px 15px;
+        padding: 15px 10px;
     }
     .card {
         flex: 0 1 140px;
-        min-height: 150px;
-        padding: 12px 6px;
+        min-height: 135px;
+        padding: 10px 5px;
     }
     .card img {
-        max-width: 90px;
+        max-width: 85px;
     }
     .site-name {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     .logo-img {
         width: 35px;
@@ -291,41 +263,31 @@ body {
     }
     .online-users, .last-update {
         font-size: 0.85rem;
-        padding: 5px 12px;
+        padding: 4px 12px;
     }
     .popup-container img {
-        max-width: 340px;
+        max-width: 300px;
     }
     .close {
         top: -30px;
         right: -20px;
-        font-size: 30px;
-        width: 35px;
-        height: 35px;
-    }
-    .offer-text {
-        font-size: 1.2rem;
-    }
-    .extra-text {
-        font-size: 0.9rem;
+        font-size: 28px;
+        width: 32px;
+        height: 32px;
     }
     .ready-text {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     .sponsor-text, .unlock-text {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
     }
     .code-box {
-        padding: 4px 14px;
-        font-size: 0.85rem;
+        padding: 3px 10px;
+        font-size: 0.8rem;
     }
     .complete-btn {
-        font-size: 0.8rem;
-        padding: 6px 25px;
-    }
-    .popup-overlay {
-        bottom: 12px;
-        padding: 8px 15px;
+        font-size: 0.75rem;
+        padding: 5px 18px;
     }
 }
 
@@ -334,20 +296,15 @@ body {
         gap: 12px;
     }
     .card {
-        flex: 0 1 120px;
-        min-height: 130px;
+        flex: 0 1 115px;
+        min-height: 115px;
+        padding: 8px 4px;
     }
     .card img {
-        max-width: 75px;
+        max-width: 70px;
     }
     .popup-container img {
-        max-width: 300px;
-    }
-    .offer-text {
-        font-size: 1rem;
-    }
-    .extra-text {
-        font-size: 0.75rem;
+        max-width: 260px;
     }
     .ready-text {
         font-size: 0.7rem;
@@ -356,15 +313,11 @@ body {
         font-size: 0.5rem;
     }
     .code-box {
-        padding: 3px 12px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        padding: 2px 8px;
     }
     .complete-btn {
-        font-size: 0.7rem;
-        padding: 5px 20px;
-    }
-    .popup-overlay {
-        bottom: 8px;
-        padding: 5px 10px;
+        font-size: 0.65rem;
+        padding: 4px 15px;
     }
 }
