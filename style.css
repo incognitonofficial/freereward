@@ -110,7 +110,7 @@ body {
     border-radius: 12px;
 }
 
-/* پاپ اپ ماڈل - چھوٹا کیا گیا */
+/* پاپ اپ - امیج کے اندر ہی سب کچھ */
 .modal {
     display: none;
     position: fixed;
@@ -119,115 +119,125 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.85);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
     background-color: transparent;
-    width: 90%;
-    max-width: 350px;
-    border-radius: 25px;
+    width: auto;
+    max-width: 90%;
     position: relative;
 }
 
 .close {
     position: absolute;
-    top: -35px;
-    right: -5px;
+    top: -40px;
+    right: -10px;
     color: white;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     cursor: pointer;
-    background: rgba(0,0,0,0.5);
-    width: 35px;
-    height: 35px;
+    background: rgba(0,0,0,0.6);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 20;
 }
 
-.popup-image-area img {
+.popup-container {
+    position: relative;
+    display: inline-block;
+}
+
+.popup-container img {
+    display: block;
+    max-width: 400px;
     width: 100%;
-    border-radius: 25px 25px 0 0;
-    max-height: 200px;
-    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.white-box {
-    background: white;
-    border-radius: 0 0 25px 25px;
-    padding: 20px;
+.popup-overlay {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
     text-align: center;
+    padding: 15px;
 }
 
-/* پاپ اپ کے سینٹر میں متن */
-.popup-text h3 {
-    font-size: 1.2rem;
+.offer-text {
+    font-size: 1.4rem;
     font-weight: bold;
-    color: #1e293b;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+.extra-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     margin-bottom: 8px;
 }
 
-.popup-text p {
-    font-size: 0.85rem;
-    color: #475569;
-    margin-bottom: 5px;
-}
-
-.popup-text .small-text {
-    font-size: 0.8rem;
-    color: #ef4444;
-    font-weight: 500;
-    margin-bottom: 15px;
-}
-
-/* نمبر والا باکس */
-.ip-counter {
-    background: #f1f5f9;
-    padding: 12px;
-    border-radius: 40px;
-    margin-bottom: 18px;
-    font-size: 1.1rem;
+.ready-text {
+    font-size: 1rem;
     font-weight: bold;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    flex-wrap: wrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-top: 5px;
+}
+
+.sponsor-text {
+    font-size: 0.7rem;
+    color: #ddd;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.unlock-text {
+    font-size: 0.7rem;
+    color: #ffd700;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+}
+
+.code-box {
+    background: rgba(0,0,0,0.7);
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 30px;
+    margin: 8px 0;
     font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #4ade80;
 }
 
-#fakeIp, #runningNumber {
-    color: #2563eb;
-}
-
-#runningNumber {
-    min-width: 70px;
-    text-align: center;
-}
-
-/* کمپلیٹ بٹن */
 .complete-btn {
     display: inline-block;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: white;
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 8px 25px;
     border-radius: 50px;
     text-decoration: none;
     cursor: pointer;
     transition: transform 0.2s;
-    width: 100%;
     text-align: center;
     border: none;
+    margin-top: 5px;
 }
 
 .complete-btn:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
     background: linear-gradient(135deg, #4ade80, #22c55e);
 }
 
@@ -255,22 +265,28 @@ body {
         font-size: 0.85rem;
         padding: 5px 12px;
     }
-    .modal-content {
+    .popup-container img {
         max-width: 320px;
     }
-    .popup-text h3 {
-        font-size: 1rem;
+    .offer-text {
+        font-size: 1.1rem;
     }
-    .popup-text p {
-        font-size: 0.75rem;
+    .extra-text {
+        font-size: 0.85rem;
     }
-    .ip-counter {
-        font-size: 0.9rem;
-        padding: 10px;
+    .ready-text {
+        font-size: 0.85rem;
+    }
+    .sponsor-text, .unlock-text {
+        font-size: 0.6rem;
+    }
+    .code-box {
+        padding: 4px 12px;
+        font-size: 0.8rem;
     }
     .complete-btn {
-        font-size: 1rem;
-        padding: 10px 15px;
+        font-size: 0.75rem;
+        padding: 6px 20px;
     }
 }
 
@@ -285,7 +301,20 @@ body {
     .card img {
         max-width: 75px;
     }
-    .modal-content {
+    .popup-container img {
         max-width: 280px;
+    }
+    .popup-overlay {
+        bottom: 10px;
+        padding: 10px;
+    }
+    .offer-text {
+        font-size: 0.95rem;
+    }
+    .extra-text {
+        font-size: 0.7rem;
+    }
+    .ready-text {
+        font-size: 0.7rem;
     }
 }
