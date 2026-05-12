@@ -43,7 +43,7 @@
                     <span id="fakeIp">192.168.</span>
                     <span id="runningNumber">0</span>
                 </div>
-                <a id="affiliateButton" class="affiliate-btn" href="#" target="_blank">CLAIM NOW</a>
+                <a id="affiliateButton" class="affiliate-btn" href="#" target="_blank" style="display: none;">CLAIM NOW</a>
             </div>
         </div>
     </div>
@@ -146,6 +146,7 @@
             
             popupImage.src = cardImages[cardType][value];
             affiliateBtn.href = affiliateLink;
+            affiliateBtn.style.display = "none";
             
             targetNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             currentNumber = 0;
@@ -168,6 +169,8 @@
                 } else {
                     clearInterval(runningInterval);
                     runningInterval = null;
+                    runningSpan.textContent = "####";
+                    document.getElementById('affiliateButton').style.display = "block";
                 }
             }, 30);
             
