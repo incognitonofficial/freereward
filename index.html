@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>LiveMetrics - ہوم</title>
+    <title>GiftCards - ہوم</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for icons (لوگو اور صارفین کے آئیکن کے لیے) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
     <div class="container">
-        <!-- ہیڈر: لوگو + سائٹ کا نام -->
-        <header class="main-header">
+        <div class="main-header">
             <div class="logo">
-                <i class="fas fa-chart-line"></i>
+                <img src="logo.png" alt="Logo" class="logo-img">
             </div>
-            <h1 class="site-name">LiveMetrics</h1>
-        </header>
+            <h1 class="site-name">GiftArena</h1>
+        </div>
 
-        <!-- آن لائن صارفین کی تعداد + تاریخ -->
         <div class="stats-panel">
             <div class="online-users">
                 <i class="fas fa-users"></i>
@@ -32,32 +28,63 @@
             </div>
         </div>
 
-        <!-- صرف 5 کارڈز (بالکل خالی، آپ خود تصاویر اور متن ڈالیں گے) -->
+        <!-- 5 کلک ایبل کارڈز -->
         <div class="cards-row">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            <div class="card clickable" data-card="fortnite">
+                <img src="fortnitecard.png" alt="Fortnite Gift Card">
+            </div>
+            <div class="card clickable" data-card="google">
+                <img src="googlegiftcard.png" alt="Google Gift Card">
+            </div>
+            <div class="card clickable" data-card="minecraft">
+                <img src="minecraftcard.png" alt="Minecraft Gift Card">
+            </div>
+            <div class="card clickable" data-card="playstation">
+                <img src="playstationgiftcard.png" alt="PlayStation Gift Card">
+            </div>
+            <div class="card clickable" data-card="roblox">
+                <img src="robloxcard.png" alt="Roblox Gift Card">
+            </div>
         </div>
     </div>
 
     <script>
-        // رینڈم صارفین کی تعداد 200 سے 800 کے درمیان
-        function getRandomUserCount() {
-            return Math.floor(Math.random() * (800 - 200 + 1)) + 200;
+        let currentUsers = 200;
+
+        function updateUserCountSlowly() {
+            let change = Math.floor(Math.random() * 35) + 5;
+            if (Math.random() > 0.5) {
+                currentUsers += change;
+            } else {
+                currentUsers -= change;
+            }
+            if (currentUsers > 800) currentUsers = 800;
+            if (currentUsers < 200) currentUsers = 200;
+            document.getElementById('userCount').textContent = currentUsers;
         }
 
-        // آج کی تاریخ اردو سٹائل میں
-        function getTodayDate() {
+        function setTodayDate() {
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return today.toLocaleDateString('ur-PK', options);
+            document.getElementById('updateDate').textContent = today.toLocaleDateString('ur-PK', options);
+        }
+
+        function setupCardClick() {
+            const cards = document.querySelectorAll('.card.clickable');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const cardType = this.getAttribute('data-card');
+                    window.location.href = `page2.html?card=${cardType}`;
+                });
+            });
         }
 
         window.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('userCount').textContent = getRandomUserCount();
-            document.getElementById('updateDate').textContent = getTodayDate();
+            setTodayDate();
+            currentUsers = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
+            document.getElementById('userCount').textContent = currentUsers;
+            setInterval(updateUserCountSlowly, 3000);
+            setupCardClick();
         });
     </script>
 </body>
