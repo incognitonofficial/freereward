@@ -224,6 +224,26 @@ body {
     transform: scale(1.03);
 }
 
+/* Disclaimer Footer - مکمل درست */
+.disclaimer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    clear: both;
+    width: 100%;
+    display: block;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+.disclaimer p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    margin: 0;
+}
+
 /* ----- موبائل کے لیے ----- */
 @media (max-width: 650px) {
     .card {
