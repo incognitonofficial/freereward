@@ -6,22 +6,20 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #4D6AFF, #3B82F6, #1E40AF);
-    background-size: 200% 200%;
+    background: linear-gradient(90deg, #FFFFFF, #4D6AFF, #FFFFFF, #3B82F6, #FFFFFF);
+    background-size: 500% 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    animation: gradientBG 4s ease infinite;
+    animation: gradientBG 8s linear infinite;
 }
 
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
-
 .container {
     max-width: 1000px;
     width: 100%;
