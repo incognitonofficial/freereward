@@ -10,8 +10,9 @@ body {
     background-size: 500% 100%;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 20px;
     animation: gradientBG 8s linear infinite;
 }
@@ -20,39 +21,20 @@ body {
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
 }
-.container {
-    max-width: 1000px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 30px;
-    padding: 20px 12px;
-    box-shadow: none;
-    border: none;
-}
 
-.main-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+/* لوگو والا حصہ */
+.logo-wrapper {
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .logo-img {
     width: 150px;
     height: 80px;
-    display: block;
-    margin: 0 auto;
-
+    display: inline-block;
 }
 
-.site-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
+/* Stats Panel */
 .stats-panel {
     display: flex;
     justify-content: space-between;
@@ -61,6 +43,8 @@ body {
     padding: 8px 16px;
     border-radius: 50px;
     margin-bottom: 25px;
+    width: 100%;
+    max-width: 1000px;
 }
 
 .online-users, .last-update {
@@ -75,13 +59,18 @@ body {
     font-weight: 600;
 }
 
+/* کارڈز والی قطار */
 .cards-row {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
+    max-width: 1200px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
+/* کارڈز */
 .card {
     flex: 0 1 150px;
     background: rgba(255, 255, 255, 0.15);
@@ -110,7 +99,7 @@ body {
     border-radius: 12px;
 }
 
-/* ----- پاپ اپ — اب باکس باہر نہیں نکلے گا ----- */
+/* ----- پاپ اپ ----- */
 .modal {
     display: none;
     position: fixed;
@@ -225,18 +214,14 @@ body {
     transform: scale(1.03);
 }
 
-/* Disclaimer Footer - مکمل درست */
+/* Disclaimer Footer */
 .disclaimer {
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    clear: both;
     width: 100%;
-    display: block;
-    position: relative;
-    left: 0;
-    right: 0;
+    max-width: 1000px;
 }
 
 .disclaimer p {
@@ -253,9 +238,6 @@ body {
     }
     .card img {
         max-width: 75px;
-    }
-    .site-name {
-        font-size: 1.3rem;
     }
     .popup-container img {
         max-width: 280px;
@@ -279,8 +261,11 @@ body {
         font-size: 0.65rem;
         padding: 4px 15px;
     }
-    .container {
-        padding: 15px 8px;
+    .stats-panel {
+        max-width: 100%;
+    }
+    .disclaimer {
+        max-width: 100%;
     }
 }
 
