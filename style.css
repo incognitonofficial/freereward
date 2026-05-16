@@ -83,13 +83,14 @@ body {
 }
 
 /* کارڈز والی قطار */
+/* کارڈز والی قطار */
 .cards-row {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0px;
-    row-gap: 0px;
-    column-gap: 0px;
+    margin: 0px;
+    padding: 0px;
     max-width: 1200px;
     width: 100%;
     margin-bottom: 20px;
@@ -98,7 +99,7 @@ body {
 /* کارڈز */
 .card {
     flex: 0 1 240px;
-        margin: 0px;
+    margin: 0px;
     border-radius: 10px;
     padding: 15px 8px;
     min-height: 220px;
@@ -111,6 +112,15 @@ body {
     backdrop-filter: blur(10px);
     transition: transform 0.2s;
     cursor: pointer;
+    box-sizing: border-box;
+}
+
+.card:last-child {
+    margin-right: 0px;
+}
+
+.card:first-child {
+    margin-left: 0px;
 }
 
 .card:hover {
