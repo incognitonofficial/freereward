@@ -86,7 +86,7 @@ body {
 /* کارڈز والی قطار */
 .cards-row {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 8px;
     margin: 0px;
