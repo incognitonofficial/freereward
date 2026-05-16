@@ -110,7 +110,7 @@ body {
     justify-content: center;
     border: none;
     backdrop-filter: blur(10px);
-    transition: transform 0.2s;
+    transition: transform 0.5s;
     cursor: pointer;
 }
 
