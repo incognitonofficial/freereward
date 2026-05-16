@@ -74,7 +74,7 @@ body {
 .card {
     flex: 0 1 200px;
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 12px 6px;
     min-height: 190px;
     display: flex;
