@@ -101,7 +101,6 @@ body {
 .card {
     width: 180px;
     flex: none;
-    background: rgba(255, 255, 255, 0.15);
     border-radius: 5px;
     padding: 15px 8px;
     min-height: auto;
