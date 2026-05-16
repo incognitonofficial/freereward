@@ -38,7 +38,6 @@ body {
 .stats-panel {
     display: flex;
     justify-content: space-between;
-    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
     padding: 8px 16px;
     border-radius: 50px;
