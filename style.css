@@ -19,9 +19,13 @@ body {
     animation: bgscroll 20s linear infinite;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+@keyframes bgscroll {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
 }
 
 /* لوگو والا حصہ */
