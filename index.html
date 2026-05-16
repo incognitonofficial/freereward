@@ -3,69 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="google-site-verification" content="Fbf8OX5GQKsrU1oNJZUuLf-Yy1GU1hePzuu1arDEknA" />    
-    <title>GiftCards</title>    
+    <meta name="google-site-verification" content="Fbf8OX5GQKsrU1oNJZUuLf-Yy1GU1hePzuu1arDEknA" />
+    <title>GiftCards</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="main-header">
-            <div class="logo">
-                <img src="images/logo3.png" alt="Logo" class="logo-img">
-            </div>
-            
-            <!-- <h1 class="site-name">GiftArena</h1> -->
-            
+
+    <!-- لوگو (container سے باہر) -->
+    <div class="logo-wrapper">
+        <img src="images/logo3.png" alt="Logo" class="logo-img">
+    </div>
+
+    <!-- Stats Panel (container سے باہر) -->
+    <div class="stats-panel">
+        <div class="online-users">
+            <i class="fas fa-users"></i>
+            <span id="userCount">200</span>
+            <span> Online Users</span>
         </div>
-
-        <div class="stats-panel">
-            <div class="online-users">
-                <i class="fas fa-users"></i>
-                <span id="userCount">200</span>
-                <span> Online Users</span>
-            </div>
-            <div class="last-update">
-                <i class="fas fa-calendar-alt"></i>
-                <span id="updateDate">----</span>
-            </div>
+        <div class="last-update">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="updateDate">----</span>
         </div>
+    </div>
 
-        <div class="cards-row">
-            <div class="card clickable" data-card="fortnite">
-                <img src="images/fortnitecard.png" alt="">
-            </div>
-            <div class="card clickable" data-card="google">
-                <img src="images/googlegiftcard.png" alt="">
-            </div>
-            <div class="card clickable" data-card="minecraft">
-                <img src="images/minecraftcard.png" alt="">
-            </div>
-            <div class="card clickable" data-card="playstation">
-                <img src="images/playstationgiftcard.png" alt="">
-            </div>
-            <div class="card clickable" data-card="roblox">
-                <img src="images/robloxcard.png" alt="">
-            </div>
-            <div class="card clickable" data-card="bestway">
-                <img src="images/bestway.png" alt="">
-            </div>
-            
- <div class="card clickable" data-card="xbox">
-                <img src="images/xboxgiftcard.png" alt="">
-            </div>
-
+    <!-- کارڈز (container سے باہر) -->
+    <div class="cards-row">
+        <div class="card clickable" data-card="fortnite">
+            <img src="images/fortnitecard.png" alt="">
+        </div>
+        <div class="card clickable" data-card="google">
+            <img src="images/googlegiftcard.png" alt="">
+        </div>
+        <div class="card clickable" data-card="minecraft">
+            <img src="images/minecraftcard.png" alt="">
+        </div>
+        <div class="card clickable" data-card="playstation">
+            <img src="images/playstationgiftcard.png" alt="">
+        </div>
+        <div class="card clickable" data-card="roblox">
+            <img src="images/robloxcard.png" alt="">
+        </div>
+        <div class="card clickable" data-card="bestway">
+            <img src="images/bestway.png" alt="">
+        </div>
+        <div class="card clickable" data-card="xbox">
+            <img src="images/xboxgiftcard.png" alt="">
+        </div>
         <div class="card clickable" data-card="amazon">
-                <img src="images/amazon.png" alt="">
-            </div>     
-            
+            <img src="images/amazon.png" alt="">
         </div>
-<!-- Disclaimer -->
-<div class="disclaimer">
-    <p><strong>How this works:</strong> This website is supported by sponsors. When you click "Complete Now", you will see offers from our partners. Completing an offer unlocks your gift card. This helps us keep the site completely free for everyone.</p>
-</div>
-    
+    </div>
+
+    <!-- Disclaimer (container سے باہر) -->
+    <div class="disclaimer">
+        <p><strong>How this works:</strong> This website is supported by sponsors. When you click "Complete Now", you will see offers from our partners. Completing an offer unlocks your gift card. This helps us keep the site completely free for everyone.</p>
     </div>
 
     <script>
