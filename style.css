@@ -9,7 +9,7 @@ body {
     background-image: url('images/bg.png');
     background-size: auto 100%;
     background-repeat: repeat-x;
-    background-position: 0 0;
+    background-position: 1000px 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -21,10 +21,10 @@ body {
 
 @keyframes bgscroll {
     0% {
-        background-position: 0 0;
+        background-position: 1000px 0;
     }
     100% {
-        background-position: 1000px 0;
+        background-position: 0 0;
     }
 }
 
