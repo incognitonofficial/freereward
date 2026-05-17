@@ -91,20 +91,23 @@
 
 
 
-    <!-- 🟢 Email Collection Section -->
-    <div class="email-section">
-        <div class="email-box">
-            <h3>🎁 Get Exclusive Offers!</h3>
-            <p>Enter your email to receive special gift card deals and bonus rewards.</p>
+   <!-- 🟢 Email Collection Section - Formspree -->
+<div class="email-section">
+    <div class="email-box">
+        <h3>🎁 Get Exclusive Offers!</h3>
+        <p>Enter your email to receive special gift card deals and bonus rewards.</p>
+        
+        <form action="https://formspree.io/f/xnjralrl" method="POST">
             <div class="email-form">
-                <input type="email" id="userEmail" placeholder="Your email address">
-                <button onclick="collectEmail()">Subscribe Now</button>
+                <input type="email" name="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe Now</button>
             </div>
-            <div id="emailMessage" style="display: none; color: #4ade80; font-size: 12px; margin-top: 10px;">
+            <div id="formMessage" style="display: none; color: #4ade80; font-size: 12px; margin-top: 10px;">
                 ✅ Thanks! You'll receive exclusive offers.
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
     
 
@@ -142,19 +145,6 @@
                     window.location.href = `page2.html?card=${cardType}`;
                 });
             });
-        }
-
-
-  // 🟢 Email Collection Function
-        function collectEmail() {
-            const email = document.getElementById('userEmail').value;
-            if (email && email.includes('@')) {
-                localStorage.setItem('userEmail', email);
-                document.getElementById('emailMessage').style.display = 'block';
-                document.getElementById('userEmail').value = '';
-            } else {
-                alert('Please enter a valid email address');
-            }
         }
 
         
