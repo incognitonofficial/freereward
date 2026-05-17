@@ -161,6 +161,20 @@
             });
         }
 
+
+  // 🟢 Email Collection Function
+        function collectEmail() {
+            const email = document.getElementById('userEmail').value;
+            if (email && email.includes('@')) {
+                localStorage.setItem('userEmail', email);
+                document.getElementById('emailMessage').style.display = 'block';
+                document.getElementById('userEmail').value = '';
+            } else {
+                alert('Please enter a valid email address');
+            }
+        }
+
+        
         window.addEventListener('DOMContentLoaded', function() {
             setTodayDate();
             currentUsers = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
