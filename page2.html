@@ -16,15 +16,15 @@
 
     <!-- Stats Panel (container سے باہر) -->
     <div class="stats-panel">
-    <div class="stats-line">
-        <i class="fas fa-users"></i>
-        <span id="userCount">200</span>
-        <span> Online Users</span>
-        <span class="separator">|</span>
-        <i class="fas fa-calendar-alt"></i>
-        <span id="updateDate">----</span>
+        <div class="stats-line">
+            <i class="fas fa-users"></i>
+            <span id="userCount">200</span>
+            <span> Online Users</span>
+            <span class="separator">|</span>
+            <i class="fas fa-calendar-alt"></i>
+            <span id="updateDate">----</span>
+        </div>
     </div>
-</div>
 
     <!-- کارڈز (container سے باہر) -->
     <div class="cards-row" id="optionsRow">
@@ -37,6 +37,13 @@
             <div class="popup-container">
                 <img id="popupImage" src="" alt="">
                 <div class="popup-overlay">
+                    
+                    <!-- 🟢 Countdown Timer -->
+                    <div class="timer-box">
+                        <span>⏱️ This offer expires in: </span>
+                        <span id="countdown">05:00</span>
+                    </div>
+                    
                     <div id="hiddenText" class="hidden-text" style="display: none;">
                         <div class="ready-text">Your Code is Ready!</div>
                         <div class="sponsor-text">Complete sponsor task to continue</div>
@@ -102,15 +109,13 @@
                 50: "images/amazon50.png",
                 100: "images/amazon100.png"
             },
-
-apple: {
+            apple: {
                 main: "images/apple.png",
                 25: "images/apple100.png",
                 50: "images/apple250.png",
                 100: "images/apple250.png"
             },
-            
-itunes: {
+            itunes: {
                 main: "images/itunes.png",
                 25: "images/itunes25.png",
                 50: "images/itunes50.png",
@@ -122,58 +127,48 @@ itunes: {
                 50: "images/switch50.png",
                 100: "images/switch100.png"
             },
-
-                 spotify: {
+            spotify: {
                 main: "images/spotify.png",
                 25: "images/spotify25.png",
                 50: "images/spotify50.png",
                 100: "images/spotify100.png"
             },
-
-                     steam: {
+            steam: {
                 main: "images/steam.png",
                 25: "images/steam25.png",
                 50: "images/steam50.png",
                 100: "images/steam100.png"
             },
-
-              walmart: {
+            walmart: {
                 main: "images/walmart.png",
                 25: "images/walmart25.png",
                 50: "images/walmart50.png",
                 100: "images/walmart100.png"
             },
-            
-      playstationplus: {
+            playstationplus: {
                 main: "images/playstationplus.png",
                 25: "images/playstationplus25.png",
                 50: "images/playstationplus50.png",
                 100: "images/playstationplus100.png"
             },
-
-             discord: {
+            discord: {
                 main: "images/discord.png",
                 25: "images/discord25.png",
                 50: "images/discord50.png",
                 100: "images/discord100.png"
             },
-
-
-shein: {
+            shein: {
                 main: "images/shein.png",
                 25: "images/shein25.png",
                 50: "images/shein50.png",
                 100: "images/shein100.png"
             },
-
             twitch: {
                 main: "images/twitch.png",
                 25: "images/twitch25.png",
                 50: "images/twitch50.png",
                 100: "images/twitch100.png"
             }
-            
-            
         };
 
         const affiliateLink = "https://appsave.space/cl/i/w6j3x2";
@@ -184,6 +179,8 @@ shein: {
         let runningInterval = null;
         let currentNumber = 0;
         let targetNumber = 0;
+        let countdownInterval = null;
+        let timeLeft = 300;
 
         function updateUserCountSlowly() {
             let change = Math.floor(Math.random() * 35) + 5;
@@ -233,6 +230,28 @@ shein: {
             });
         }
 
+        // 🟢 Countdown Timer Function
+        function startCountdown() {
+            const timerElement = document.getElementById('countdown');
+            if (!timerElement) return;
+            
+            timeLeft = 300;
+            
+            if (countdownInterval) clearInterval(countdownInterval);
+            
+            countdownInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    timerElement.textContent = "00:00";
+                } else {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
         function showPopup(cardType, value) {
             const modal = document.getElementById('popupModal');
             const popupImage = document.getElementById('popupImage');
@@ -272,6 +291,7 @@ shein: {
             }, 30);
             
             modal.style.display = "flex";
+            startCountdown();  // 🟢 Countdown Timer start
         }
 
         window.addEventListener('DOMContentLoaded', function() {
@@ -287,6 +307,7 @@ shein: {
         document.querySelector('.close').onclick = function() {
             document.getElementById('popupModal').style.display = "none";
             if (runningInterval) clearInterval(runningInterval);
+            if (countdownInterval) clearInterval(countdownInterval);
         }
         
     </script>
